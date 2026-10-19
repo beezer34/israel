@@ -28,7 +28,12 @@ import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 
 MEF_URL = "https://israelvote.meforum.org/"
-NEWS_FEEDS = ["https://www.timesofisrael.com/feed/"]
+NEWS_FEEDS = [
+    "https://www.jpost.com/rss/rssfeedsisraelnews.aspx",
+    "https://www.timesofisrael.com/feed/",
+]
+# News sites block unknown bots, so the news fetch identifies as a normal browser.
+NEWS_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 ELECTION_DAY = dt.date(2026, 10, 27)
 UA = "Mozilla/5.0 (compatible; politics-decoded-family-site/1.0; +https://beezer34.github.io/israel/)"
 
@@ -69,8 +74,8 @@ class Fail(Exception):
 
 
 # ---------------------------------------------------------------- fetching
-def fetch(url, timeout=30):
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en"})
+def fetch(url, timeout=30, ua=UA):
+    req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept-Language": "en"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read().decode("utf-8", "replace")
 
@@ -233,9 +238,9 @@ def news(feed_urls, limit=12):
     items, errors = [], []
     for url in feed_urls:
         try:
-            root = ET.fromstring(fetch(url).encode("utf-8"))
+            root = ET.fromstring(fetch(url, ua=NEWS_UA).encode("utf-8"))
         except Exception as e:  # noqa: BLE001
-            errors.append(f"{url}: {e}")
+            errors.append(f"{url.split('/')[2]}: {e}")
             continue
         for it in root.iter("item"):
             title = (it.findtext("title") or "").strip()
@@ -309,7 +314,7 @@ def main():
 
     if not args.no_news and out["skip"] == "false":
         items, errs = news(NEWS_FEEDS)
-        report += ["", "## Election headlines (Times of Israel)"]
+        report += ["", "## Election headlines (Jerusalem Post and Times of Israel)"]
         if items:
             report += [f"- [{t}]({l})" for t, l in items]
         else:
