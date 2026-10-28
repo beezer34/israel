@@ -4,7 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Politics Decoded: US vs. Israel</title>
-    <!-- POLL DATA: rewritten automatically every day by scripts/update_site.py. Edit by hand only if the script is off. -->
+    <!-- RESULTS DATA: the vote count, rewritten automatically every few hours by scripts/update_site.py. -->
+    <script id="results-data" type="application/json">
+{
+  "asOf": "2026-10-28T08:58:52Z",
+  "status": "counting",
+  "reporting": 76.89,
+  "validVotes": 4006695,
+  "thresholdVotes": 130218,
+  "otherPct": 1.01,
+  "source": "https://www.thepetek.com/results",
+  "official": "https://votes26.bechirot.gov.il/",
+  "parties": {
+    "likud": {
+      "pct": 20.7,
+      "seats": 27
+    },
+    "yashar": {
+      "pct": 16.0,
+      "seats": 20
+    },
+    "jointlist": {
+      "pct": 9.9,
+      "seats": 13
+    },
+    "together": {
+      "pct": 8.8,
+      "seats": 11
+    },
+    "democrats": {
+      "pct": 6.4,
+      "seats": 8
+    },
+    "beiteinu": {
+      "pct": 6.0,
+      "seats": 8
+    },
+    "utj": {
+      "pct": 6.0,
+      "seats": 7
+    },
+    "otzma": {
+      "pct": 5.5,
+      "seats": 7
+    },
+    "shas": {
+      "pct": 5.4,
+      "seats": 7
+    },
+    "raam": {
+      "pct": 5.1,
+      "seats": 6
+    },
+    "rzp": {
+      "pct": 4.9,
+      "seats": 6
+    },
+    "reservists": {
+      "pct": 2.64,
+      "seats": 0
+    },
+    "amcha": {
+      "pct": 1.65,
+      "seats": 0
+    }
+  }
+}
+    </script>
+    <!-- COALITION DATA: the coalition talks, rewritten every morning by scripts/coalition_update.py (written by Claude from news reports). -->
+    <script id="coalition-data" type="application/json">
+{
+  "updated": "2026-10-28",
+  "stage": "counting",
+  "headline": {
+    "en": "Votes are still being counted. In the count so far neither Netanyahu's bloc nor the opposition parties reach 61 seats on their own. Official results are due by 4 November.",
+    "he": "ספירת הקולות עדיין נמשכת. לפי הספירה עד כה, לא גוש נתניהו ולא מפלגות האופוזיציה מגיעים לבדם ל-61 מנדטים. התוצאות הרשמיות צפויות עד 4 בנובמבר."
+  },
+  "mandate": {
+    "holder": "",
+    "given": "",
+    "deadline": ""
+  },
+  "recommendations": {},
+  "keyDates": [
+    {
+      "date": "2026-11-04",
+      "label": {
+        "en": "Latest date for the official results",
+        "he": "המועד האחרון לפרסום התוצאות הרשמיות"
+      }
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-10-28",
+      "title": {
+        "en": "Both camps claim the upper hand as the count goes on",
+        "he": "שני המחנות טוענים ליתרון בזמן שהספירה נמשכת"
+      },
+      "text": {
+        "en": "Netanyahu said Likud is the largest party and called for a strong right-wing government. Eisenkot said voters chose change and that he will work with his partners to form a government. Bennett said the opposition parties are already in contact with each other.",
+        "he": "נתניהו אמר שהליכוד היא המפלגה הגדולה וקרא להקמת ממשלת ימין חזקה. איזנקוט אמר שהבוחרים בחרו בשינוי ושהוא יפעל עם שותפיו להקמת ממשלה. בנט אמר שמפלגות האופוזיציה כבר מדברות זו עם זו."
+      },
+      "sources": [
+        {
+          "name": "JTA",
+          "url": "https://www.jta.org/2026/10/27/israel/netanyahu-leads-in-exit-polls-but-change-bloc-by-eisenkot-has-more-seats"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "title": {
+        "en": "Israel votes, with the highest turnout since 1999",
+        "he": "ישראל הצביעה, בשיעור ההצבעה הגבוה ביותר מאז 1999"
+      },
+      "text": {
+        "en": "77.7% of eligible voters cast a ballot. Exit polls on all three main TV channels showed neither camp with 61 seats.",
+        "he": "77.7% מבעלי זכות הבחירה הצביעו. לפי המדגמים בשלושת ערוצי הטלוויזיה המרכזיים, לאף מחנה אין 61 מנדטים."
+      },
+      "sources": [
+        {
+          "name": "JTA",
+          "url": "https://www.jta.org/2026/10/27/israel/netanyahu-leads-in-exit-polls-but-change-bloc-by-eisenkot-has-more-seats"
+        },
+        {
+          "name": "Times of Israel",
+          "url": "https://www.timesofisrael.com/liveblog_entry/kan-11-updates-exit-poll-pro-netanyahu-bloc-pulls-even-with-opposition/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- POLL DATA: the last poll-of-polls average before election day (frozen). Shown next to the results for comparison. -->
     <script id="poll-data" type="application/json">
 {
   "asOf": "2026-10-23",
@@ -112,6 +245,27 @@
         .c4 { --accent: #B8336A; }
         .c5 { --accent: #B86E00; }
         .c6 { --accent: #16203A; }
+        .c0 { --accent: #C02A40; }   /* Election 2026: what's happening now */
+
+        /* Election 2026: stage tracker, results table, coalition talks */
+        .live-dot { width: .6rem; height: .6rem; border-radius: 999px; background: var(--accent); display: inline-block; box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); animation: live 2s infinite; }
+        @keyframes live { 70% { box-shadow: 0 0 0 .5rem transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+        .stage { position: relative; padding: .85rem .9rem; border-radius: 1rem; border: 2px solid var(--line); background: #fff; }
+        .stage-num { width: 1.75rem; height: 1.75rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; background: #EEF2F8; color: #56627C; }
+        .stage.done { border-color: #CFE9DC; background: #F4FBF7; }
+        .stage.done .stage-num { background: #0B7F57; color: #fff; }
+        .stage.now { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, #fff); }
+        .stage.now .stage-num { background: var(--accent); color: #fff; }
+        .res-table td, .res-table th { padding: .55rem .5rem; }
+        .res-table tbody tr + tr { border-top: 1px solid var(--line); }
+        .bloc-track { position: relative; height: 1.9rem; border-radius: .6rem; background: #EEF2F8; overflow: hidden; }
+        .bloc-fill { height: 100%; border-radius: .6rem; display: flex; align-items: center; padding-inline: .6rem; font-weight: 700; font-size: .9rem; color: #fff; white-space: nowrap; }
+        .bloc-61 { position: absolute; top: -.2rem; bottom: -.2rem; inset-inline-start: 50.83%; width: 2px; background: var(--ink); }
+        .update-item { position: relative; padding-inline-start: 1.5rem; }
+        .update-item::before { content: ""; position: absolute; inset-inline-start: .3rem; top: .45rem; width: .6rem; height: .6rem; border-radius: 999px; background: var(--accent); }
+        .update-item + .update-item::after { content: ""; position: absolute; inset-inline-start: .55rem; top: -1.25rem; height: 1.6rem; width: 2px; background: var(--line); }
+        .btn-ghost { display: inline-flex; align-items: center; gap: .6rem; padding: .75rem 1.3rem; border-radius: 999px; border: 2px solid var(--line); background: #fff; color: var(--ink); font-weight: 600; font-size: 1.05rem; }
+        .btn-ghost:hover { border-color: var(--ink); }
 
         .part-head { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
         .part-num {
@@ -222,6 +376,7 @@
         .flip.flipped .flip-inner { transform: rotateY(180deg); }
         @media (prefers-reduced-motion: reduce) {
             .flip-inner, .chev, .start-card, .switch, .switch .knob, #read-progress { transition: none; }
+            .live-dot { animation: none; }
             .start-card:hover { transform: none; }
         }
         /* Range slider */
@@ -264,6 +419,10 @@
                 </button>
             </div>
             <nav class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2.5 -mx-1 px-1" aria-label="Sections">
+                <a href="#results" data-target="results" class="nav-pill px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 bg-slate-950 hover:bg-slate-900 border border-slate-700 whitespace-nowrap transition"><span class="l-en">Results</span><span class="l-he">התוצאות</span></a>
+                <a href="#talks" data-target="talks" class="nav-pill px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 bg-slate-950 hover:bg-slate-900 border border-slate-700 whitespace-nowrap transition"><span class="l-en">Coalition talks</span><span class="l-he">המגעים הקואליציוניים</span></a>
+                <a href="#builder" data-target="builder" class="nav-pill px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 bg-slate-950 hover:bg-slate-900 border border-slate-700 whitespace-nowrap transition"><span class="l-en">Build a coalition</span><span class="l-he">בונה הקואליציה</span></a>
+                <span class="shrink-0 w-px h-5 bg-slate-600 mx-1" aria-hidden="true"></span>
                 <a href="#part-1" data-target="part-1" class="nav-pill px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 bg-slate-950 hover:bg-slate-900 border border-slate-700 whitespace-nowrap transition"><span class="l-en">1. Two systems</span><span class="l-he">1. שתי שיטות</span></a>
                 <a href="#part-2" data-target="part-2" class="nav-pill px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 bg-slate-950 hover:bg-slate-900 border border-slate-700 whitespace-nowrap transition"><span class="l-en">2. Words that don't translate</span><span class="l-he">2. מילים שלא מתורגמות</span></a>
                 <a href="#part-3" data-target="part-3" class="nav-pill px-3 py-1.5 rounded-full text-sm font-medium text-slate-300 bg-slate-950 hover:bg-slate-900 border border-slate-700 whitespace-nowrap transition"><span class="l-en">3. History</span><span class="l-he">3. היסטוריה</span></a>
@@ -281,21 +440,22 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-12 md:pt-14 md:pb-14">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 <div class="lg:col-span-5">
-                    <p class="text-base text-slate-400 mb-3"><span class="l-en">A non-partisan family guide · Polls updated <span class="poll-date-en"></span></span><span class="l-he">מדריך משפחתי לא מפלגתי · הסקרים עודכנו ב-<span class="poll-date-he"></span></span></p>
+                    <p class="text-base text-slate-400 mb-3"><span class="l-en">A non-partisan family guide · Updated <span class="update-date-en"></span></span><span class="l-he">מדריך משפחתי לא מפלגתי · עודכן ב-<span class="update-date-he"></span></span></p>
                     <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-5 leading-[1.05]">
                         <span class="l-en">Politics in the US and Israel, explained</span>
                         <span class="l-he">הפוליטיקה בארה״ב ובישראל, בהסבר פשוט</span>
                     </h1>
                     <p class="text-xl text-slate-300 leading-relaxed max-w-xl">
-                        <span class="l-en">Two countries, two very different systems, and the same words meaning different things. Five short parts. Open "Read more" only when you want the details.</span>
-                        <span class="l-he">שתי מדינות, שתי שיטות שונות מאוד, ואותן מילים שאומרות דברים שונים. חמישה חלקים קצרים. פותחים את "לקרוא עוד" רק כשרוצים את הפרטים.</span>
+                        <span class="l-en">Israel voted on 27 October. Now comes the hard part: putting 61 seats together. Start with where things stand today, then the five short parts explain how it all works.</span>
+                        <span class="l-he">ישראל הצביעה ב-27 באוקטובר. עכשיו מגיע החלק הקשה: לחבר יחד 61 מנדטים. התחילו במצב נכון להיום, ואחר כך חמשת החלקים הקצרים מסבירים איך כל זה עובד.</span>
                     </p>
                     <div class="mt-7 flex flex-wrap items-center gap-3">
-                        <a href="#part-1" class="btn-primary"><span class="l-en">Start with Part 1</span><span class="l-he">מתחילים בחלק 1</span> <i class="fa-solid fa-arrow-down text-sm"></i></a>
-                        <span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-amber-950 text-amber-200 text-sm font-semibold">
-                            <i class="fa-solid fa-calendar-day"></i>
-                            <span id="election-countdown"></span>
-                        </span>
+                        <a href="#results" class="btn-primary"><span class="l-en">Where things stand</span><span class="l-he">איפה זה עומד</span> <i class="fa-solid fa-arrow-down text-sm"></i></a>
+                        <a href="#learn" class="btn-ghost"><span class="l-en">Learn the basics</span><span class="l-he">להבין את היסודות</span></a>
+                    </div>
+                    <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-rose-950 text-rose-300 text-sm font-semibold c0">
+                        <span class="live-dot" aria-hidden="true"></span>
+                        <span id="election-status-chip"></span>
                     </div>
                 </div>
                 <div class="lg:col-span-7">
@@ -310,17 +470,278 @@
                         <figure class="hemi-card">
                             <svg id="hero-il" viewBox="0 0 360 185" class="w-full" role="img" aria-label="A parliament drawn in many colours"></svg>
                             <figcaption class="-mt-1">
-                                <div class="hemi-big" dir="ltr">10+</div>
-                                <div class="text-base text-slate-300 mt-1"><span class="l-en">parties share Israel's Knesset</span><span class="l-he">מפלגות חולקות את הכנסת</span></div>
+                                <div class="hemi-big" dir="ltr" id="hero-il-num">10+</div>
+                                <div class="text-base text-slate-300 mt-1"><span class="l-en">parties won seats in Israel's new Knesset</span><span class="l-he">מפלגות נכנסו לכנסת החדשה</span></div>
                             </figcaption>
                         </figure>
                     </div>
-                    <p class="text-sm text-slate-500 mt-2 text-center"><span class="l-en">Each dot is a seat. Both drawn at the same size so they are easy to compare. Part 1 explains why they look so different.</span><span class="l-he">כל נקודה היא מושב. שתיהן מצוירות באותו גודל כדי שיהיה קל להשוות. חלק 1 מסביר למה הן נראות כל כך שונות.</span></p>
+                    <p class="text-sm text-slate-500 mt-2 text-center"><span class="l-en">Each dot is a seat. Israel's is drawn from the count so far. Part 1 explains why the two look so different.</span><span class="l-he">כל נקודה היא מושב. הכנסת מצוירת לפי הספירה עד כה. חלק 1 מסביר למה השתיים נראות כל כך שונות.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-24">
+
+        <!-- ============================================================ -->
+        <!-- ELECTION 2026: RESULTS (refreshed automatically)              -->
+        <!-- ============================================================ -->
+        <section id="results" class="part c0 scroll-mt-28">
+            <div class="part-head">
+                <span class="part-num" aria-hidden="true"><i class="fa-solid fa-check-to-slot text-xl"></i></span>
+                <div>
+                    <div class="part-kicker flex items-center gap-2"><span class="live-dot" aria-hidden="true"></span><span class="l-en">Election 2026 · Updated automatically</span><span class="l-he">בחירות 2026 · מתעדכן אוטומטית</span></div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-ink leading-tight"><span class="l-en">Where things stand</span><span class="l-he">איפה זה עומד</span></h2>
+                    <p id="status-lead" class="part-lead"></p>
                 </div>
             </div>
 
-            <div class="mt-12">
-                <h2 class="font-display text-2xl font-semibold text-ink mb-4"><span class="l-en">Pick a part, or go in order</span><span class="l-he">בחרו חלק, או לכו לפי הסדר</span></h2>
+            <!-- Stage tracker: from the count to a sworn-in government -->
+            <ol id="stage-tracker" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-4"></ol>
+            <div id="key-dates" class="flex flex-wrap gap-2 mb-10"></div>
+
+            <!-- The count -->
+            <div class="panel rounded-2xl p-5 sm:p-8">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-3 mb-6 pb-5 border-b border-slate-700">
+                    <div>
+                        <div class="text-sm font-semibold text-sky-400 mb-1"><i class="fa-solid fa-calculator me-1.5"></i><span class="l-en">The count</span><span class="l-he">ספירת הקולות</span></div>
+                        <h3 class="font-display text-2xl sm:text-3xl font-bold text-ink" id="count-title"></h3>
+                        <p class="text-base text-slate-300 mt-1" id="count-sub"></p>
+                    </div>
+                    <div id="count-badge" class="self-start lg:self-auto px-3 py-1.5 rounded-full text-sm font-semibold"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-5 space-y-5">
+                        <div class="panel-deep rounded-2xl p-4 flex flex-col items-center">
+                            <svg id="results-hemicycle" viewBox="0 0 360 190" class="w-full max-w-sm" role="img" aria-label="Knesset seats by party in the count so far"></svg>
+                            <p class="text-sm text-slate-500 mt-1 text-center"><span class="l-en">Parties arranged roughly from left to right</span><span class="l-he">המפלגות מסודרות בערך משמאל (פוליטי) לימין (פוליטי)</span></p>
+                        </div>
+                        <div>
+                            <div class="text-sm font-semibold text-slate-400 mb-2"><span class="l-en">The blocs against the 61 needed</span><span class="l-he">הגושים מול 61 הדרושים</span></div>
+                            <div id="bloc-bars" class="space-y-2.5"></div>
+                            <p class="text-sm text-slate-500 mt-2"><span class="l-en">Blocs are the camps parties named before the vote. Parties can still switch.</span><span class="l-he">הגושים הם המחנות שהמפלגות הצהירו עליהם לפני הבחירות. מפלגות עדיין יכולות לעבור צד.</span></p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <div class="overflow-x-auto">
+                            <table class="res-table w-full text-start text-base min-w-[360px]">
+                                <thead>
+                                    <tr class="text-sm text-slate-400 border-b border-slate-700">
+                                        <th class="font-semibold text-start"><span class="l-en">Party (leader)</span><span class="l-he">מפלגה (יו״ר)</span></th>
+                                        <th class="font-semibold text-end">%</th>
+                                        <th class="font-semibold text-end"><span class="l-en">Seats</span><span class="l-he">מנדטים</span></th>
+                                        <th class="font-semibold text-end"><span class="l-en">vs. polls</span><span class="l-he">מול הסקרים</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="results-rows"></tbody>
+                            </table>
+                        </div>
+                        <div id="results-out" class="mt-4 text-base text-slate-300"></div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-500 mt-6 pt-4 border-t border-slate-700" id="count-source"></p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ELECTION 2026: COALITION TALKS (written each morning)         -->
+        <!-- ============================================================ -->
+        <section id="talks" class="c0 scroll-mt-28">
+            <div class="panel rounded-2xl p-5 sm:p-8">
+                <div class="text-sm font-semibold mb-1" style="color:var(--accent)"><i class="fa-solid fa-handshake me-1.5"></i><span class="l-en">Coalition talks</span><span class="l-he">המגעים הקואליציוניים</span></div>
+                <h3 class="font-display text-2xl sm:text-3xl font-bold text-ink mb-2"><span class="l-en">Who can get to 61?</span><span class="l-he">מי יכול להגיע ל-61?</span></h3>
+                <p id="talks-headline" class="text-lg text-slate-200 leading-relaxed max-w-3xl"></p>
+                <p id="talks-updated" class="text-sm text-slate-500 mt-2"></p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                    <div class="lg:col-span-5 space-y-5">
+                        <div id="mandate-box" class="panel-deep rounded-2xl p-5"></div>
+                        <div id="recs-box" class="panel-deep rounded-2xl p-5"></div>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <div class="text-sm font-semibold text-slate-400 mb-3"><span class="l-en">Day by day</span><span class="l-he">יום אחר יום</span></div>
+                        <div id="talks-timeline" class="space-y-5"></div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-500 mt-6 pt-4 border-t border-slate-700"><i class="fa-solid fa-robot me-1.5"></i><span class="l-en">This section is written each morning by an AI assistant (Claude) from news reports, with the sources linked under each update. It can get things wrong, so check the sources before relying on it.</span><span class="l-he">את החלק הזה כותב כל בוקר עוזר בינה מלאכותית (Claude) על סמך דיווחים בתקשורת, עם קישור למקורות מתחת לכל עדכון. הוא עלול לטעות, ולכן כדאי לבדוק את המקורות לפני שסומכים עליו.</span></p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ELECTION 2026: BUILD A COALITION, ISSUES, WHERE PARTIES STAND -->
+        <!-- ============================================================ -->
+        <section id="builder" class="c0 scroll-mt-28">
+            <!-- Coalition builder -->
+            <div class="panel rounded-2xl p-5 sm:p-8 border-2 border-slate-600 mb-10">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-6 border-b border-slate-700">
+                    <div>
+                        <div class="text-sm font-semibold text-sky-400 mb-1"><i class="fa-solid fa-puzzle-piece me-1.5"></i><span class="l-en">Try it</span><span class="l-he">נסו בעצמכם</span></div>
+                        <h3 class="font-display text-2xl sm:text-3xl font-bold text-ink"><span class="l-en">Build a 61-seat coalition</span><span class="l-he">הרכיבו קואליציה של 61</span></h3>
+                        <p class="text-base text-slate-300 mt-1"><span class="l-en">Seats are from the count so far (<span class="count-short-en"></span>). Click parties to add or remove them, or start from a scenario.</span><span class="l-he">המנדטים לפי הספירה עד כה (<span class="count-short-he"></span>). לחצו על מפלגות כדי להוסיף או להוריד אותן, או התחילו מתרחיש מוכן.</span></p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="loadCoalitionPreset('netanyahu')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-600 text-sm font-semibold text-slate-200 transition"><span class="l-en">Netanyahu's bloc</span><span class="l-he">גוש נתניהו</span></button>
+                        <button type="button" onclick="loadCoalitionPreset('opposition')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-600 text-sm font-semibold text-slate-200 transition"><span class="l-en">Opposition bloc</span><span class="l-he">גוש האופוזיציה</span></button>
+                        <button type="button" onclick="loadCoalitionPreset('opposition-raam')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-600 text-sm font-semibold text-slate-200 transition"><span class="l-en">Opposition + Ra'am (2021 model)</span><span class="l-he">אופוזיציה + רע״ם (מודל 2021)</span></button>
+                        <button type="button" onclick="loadCoalitionPreset('clear')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sm font-semibold text-slate-400 transition"><i class="fa-solid fa-rotate-left me-1"></i><span class="l-en">Clear</span><span class="l-he">ניקוי</span></button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-8">
+                    <div class="lg:col-span-5 panel-deep rounded-2xl p-4 flex flex-col items-center">
+                        <div class="text-sm font-semibold text-slate-400 mb-1"><span class="l-en">The 120-seat Knesset</span><span class="l-he">120 המושבים בכנסת</span></div>
+                        <svg id="knesset-hemicycle" viewBox="0 0 360 190" class="w-full max-w-sm" role="img" aria-label="Knesset seat map"></svg>
+                        <div class="text-center -mt-8">
+                            <div id="hemicycle-seat-number" class="font-display text-4xl font-bold text-ink" dir="ltr">0</div>
+                            <div id="hemicycle-status-badge" class="inline-block mt-1 px-3 py-1 rounded-full text-sm font-semibold"></div>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-3 text-center"><span class="l-en">Bright seats are in your coalition. Parties are arranged roughly from left to right.</span><span class="l-he">המושבים הבהירים הם בקואליציה שלכם. המפלגות מסודרות בערך משמאל (פוליטי) לימין (פוליטי).</span></p>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="panel-deep p-5 rounded-2xl">
+                            <div class="flex justify-between items-end mb-2 gap-2">
+                                <span class="text-sm font-semibold text-slate-400"><span class="l-en">Seats in your coalition</span><span class="l-he">מנדטים בקואליציה שלכם</span></span>
+                                <span id="coalition-math-summary" class="text-base font-semibold"></span>
+                            </div>
+                            <div class="relative w-full h-9 bg-slate-900 rounded-lg overflow-hidden flex border border-slate-800" id="coalition-stacked-bar"></div>
+                            <div class="relative w-full h-6 mt-1">
+                                <div class="absolute start-[50.83%] mark-center flex flex-col items-center">
+                                    <div class="w-0.5 h-2 bg-amber-400"></div>
+                                    <span class="text-xs font-semibold text-amber-300 whitespace-nowrap">61</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-deep p-5 rounded-2xl">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <span class="text-sm font-semibold text-slate-400"><span class="l-en">Red lines and tensions</span><span class="l-he">קווים אדומים ומתחים</span></span>
+                                <span id="stability-badge" class="text-sm font-semibold px-2.5 py-0.5 rounded"></span>
+                            </div>
+                            <div id="friction-messages" class="space-y-2 text-base text-slate-300"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="threshold-panel" class="mb-6 p-4 sm:p-5 rounded-2xl panel-deep border border-amber-500/30"></div>
+
+                <div id="party-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                <p class="text-sm text-slate-500 mt-4"><span class="l-en">A list that gets in wins at least 4 seats, the minimum for passing 3.25%. Red lines are what leaders said publicly before the vote; they often change after election day. The coalition talks above show what has changed since.</span><span class="l-he">רשימה שעוברת מקבלת לפחות 4 מנדטים, המינימום למי שעובר את 3.25%. הקווים האדומים הם מה שהמנהיגים אמרו בפומבי לפני הבחירות, ולעיתים קרובות הם משתנים אחרי יום הבחירות. המגעים הקואליציוניים למעלה מראים מה השתנה מאז.</span></p>
+            </div>
+            <!-- Issues -->
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+                <h3 class="font-display text-2xl font-bold text-ink"><span class="l-en">The main issues in this election</span><span class="l-he">הנושאים המרכזיים בבחירות האלה</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+                <div class="panel rounded-2xl p-5">
+                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">1. October 7 accountability and security</span><span class="l-he">1. האחריות ל-7 באוקטובר והביטחון</span></h4>
+                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">Who is responsible for the failures of October 7, 2023, and how should Israel handle Gaza, Lebanon and Iran from here?</span><span class="l-he">מי אחראי למחדלים של 7 באוקטובר 2023, ואיך ישראל צריכה להתמודד מכאן עם עזה, לבנון ואיראן?</span></p>
+                    <details class="more">
+                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
+                            <div class="more-body text-base text-slate-300 space-y-2">
+                        <p><span class="l-en"><strong class="text-ink">Opposition parties</strong> want a <strong>State Commission of Inquiry</strong> <span class="gloss">ועדת חקירה ממלכתית</span>. Under a 1968 law, the Supreme Court's President picks its members, and it can summon anyone, including the Prime Minister.</span><span class="l-he"><strong class="text-ink">מפלגות האופוזיציה</strong> רוצות <strong>ועדת חקירה ממלכתית</strong>. לפי חוק מ-1968, נשיא בית המשפט העליון בוחר את חבריה, והיא יכולה לזמן כל אחד, כולל ראש הממשלה.</span></p>
+                        <p><span class="l-en"><strong class="text-ink">The governing coalition</strong> rejects a court-chosen panel as biased against the right, and has backed an inquiry whose members would be chosen in a politically balanced way.</span><span class="l-he"><strong class="text-ink">הקואליציה</strong> דוחה ועדה שבית המשפט בוחר את חבריה, בטענה שהיא מוטה נגד הימין, ותומכת בוועדת חקירה שחבריה ייבחרו באופן מאוזן פוליטית.</span></p>
+                            </div>
+                        </details>
+                </div>
+
+                <div class="panel rounded-2xl p-5">
+                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">2. Drafting Haredi men <span class="gloss">שוויון בנטל</span></span><span class="l-he">2. גיוס חרדים ושוויון בנטל</span></h4>
+                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">Reservists have served hundreds of days since October 2023, and the army says it is short of thousands of soldiers. Should Haredi yeshiva students be drafted like everyone else?</span><span class="l-he">אנשי מילואים שירתו מאות ימים מאז אוקטובר 2023, והצבא אומר שחסרים לו אלפי חיילים. האם צריך לגייס תלמידי ישיבות חרדים כמו את כולם?</span></p>
+                    <details class="more">
+                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
+                            <div class="more-body text-base text-slate-300 space-y-2">
+                        <p><span class="l-en"><strong class="text-ink">2024:</strong> the Supreme Court ruled that there is no legal basis for a blanket exemption, ordered the army to draft yeshiva students and stopped state funding for yeshivas whose students should be serving.</span><span class="l-he"><strong class="text-ink">2024:</strong> בית המשפט העליון קבע שאין בסיס חוקי לפטור גורף, הורה לצבא לגייס תלמידי ישיבות ועצר את המימון הממשלתי לישיבות שתלמידיהן אמורים לשרת.</span></p>
+                        <p><span class="l-en"><strong class="text-ink">July 2025:</strong> UTJ quit the coalition and Shas left the government over the failure to pass a law protecting the exemption.</span><span class="l-he"><strong class="text-ink">יולי 2025:</strong> יהדות התורה פרשה מהקואליציה וש״ס יצאה מהממשלה, אחרי שלא עבר חוק שמעגן את הפטור.</span></p>
+                        <p><span class="l-en"><strong class="text-ink">Positions:</strong> Shas and UTJ want exemptions written into law. Yisrael Beiteinu, Yashar, Together and the Democrats want service for all, with penalties for those who refuse. Likud has backed gradual targets agreed with Haredi leaders.</span><span class="l-he"><strong class="text-ink">העמדות:</strong> ש״ס ויהדות התורה רוצות לעגן את הפטור בחוק. ישראל ביתנו, ישר!, ביחד והדמוקרטים רוצים שירות לכולם, עם סנקציות על מי שמסרב. הליכוד תמך ביעדי גיוס הדרגתיים בהסכמה עם ההנהגה החרדית.</span></p>
+                            </div>
+                        </details>
+                </div>
+
+                <div class="panel rounded-2xl p-5">
+                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">3. The courts, round two</span><span class="l-he">3. מערכת המשפט, סיבוב שני</span></h4>
+                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">Should the next Knesset finish the changes to the courts, or protect the court's independence in a written constitution?</span><span class="l-he">האם הכנסת הבאה צריכה להשלים את השינויים במערכת המשפט, או לעגן את עצמאות בית המשפט בחוקה כתובה?</span></p>
+                    <details class="more">
+                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
+                            <div class="more-body text-base text-slate-300 space-y-2">
+                        <p><span class="l-en"><strong class="text-ink">Already law:</strong> the March 2025 Judicial Selection Law gives politicians more say in choosing judges. It takes effect with the new Knesset, so the next government will be the first to use it, or to change it.</span><span class="l-he"><strong class="text-ink">כבר בחוק:</strong> החוק לבחירת שופטים ממרץ 2025 נותן לפוליטיקאים יותר השפעה על בחירת השופטים. הוא נכנס לתוקף עם הכנסת החדשה, ולכן הממשלה הבאה תהיה הראשונה שתשתמש בו, או תשנה אותו.</span></p>
+                        <p><span class="l-en"><strong class="text-ink">The coalition parties</strong> say court rulings since 2023 (cancelling the reasonableness law, ordering the Haredi draft, overturning the Attorney General's firing) prove the court has too much power.</span><span class="l-he"><strong class="text-ink">מפלגות הקואליציה</strong> אומרות שהפסיקות מאז 2023 (ביטול חוק הסבירות, ההוראה לגייס חרדים, ביטול פיטורי היועמ״שית) מוכיחות שלבית המשפט יש יותר מדי כוח.</span></p>
+                        <p><span class="l-en"><strong class="text-ink">The opposition parties</strong> pledge to protect the court's independence, and Bennett has proposed a written constitution.</span><span class="l-he"><strong class="text-ink">מפלגות האופוזיציה</strong> מתחייבות להגן על עצמאות בית המשפט, ובנט הציע לכתוב חוקה.</span></p>
+                            </div>
+                        </details>
+                </div>
+
+                <div class="panel rounded-2xl p-5">
+                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">4. The cost of war and the cost of living</span><span class="l-he">4. מחיר המלחמה ויוקר המחיה</span></h4>
+                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">The war has cost hundreds of billions of shekels and VAT rose to 18% in 2025. How should Israel pay for defense, bring down prices and keep its high-tech sector (about half of all exports) in the country?</span><span class="l-he">המלחמה עלתה מאות מיליארדי שקלים והמע״מ עלה ל-18% ב-2025. איך ישראל צריכה לממן את הביטחון, להוריד מחירים ולשמור כאן את ההייטק (כמחצית מכלל הייצוא)?</span></p>
+                    <details class="more">
+                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
+                            <div class="more-body text-base text-slate-300 space-y-2">
+                        <p><span class="l-en"><strong class="text-ink">The trade-off:</strong> many economists warn that a larger army, plus large budgets for coalition partners' communities, can't both be funded without higher taxes on the working middle class. The coalition parties answer that those budgets support large, lower-income families and the institutions they rely on.</span><span class="l-he"><strong class="text-ink">הדילמה:</strong> כלכלנים רבים מזהירים שאי אפשר לממן גם צבא גדול יותר וגם תקציבים גדולים לציבורים של שותפות קואליציוניות בלי להעלות מסים על מעמד הביניים העובד. מפלגות הקואליציה עונות שהתקציבים האלה תומכים במשפחות גדולות ומעוטות הכנסה ובמוסדות שהן נשענות עליהם.</span></p>
+                            </div>
+                        </details>
+                </div>
+            </div>
+
+            <!-- Where parties stand (election mode) -->
+            <details class="fold panel rounded-2xl p-5 sm:p-6 mb-10">
+                <summary>
+                    <div>
+                <h3 class="font-display text-2xl font-bold text-ink"><span class="l-en">Where the parties stand</span><span class="l-he">איפה המפלגות עומדות</span></h3>
+                <p class="text-base text-slate-400 mt-1"><span class="l-en">A simplified summary of each list's main positions. Read the parties' own platforms before deciding anything.</span><span class="l-he">סיכום פשוט של העמדות המרכזיות של כל רשימה. כדאי לקרוא את המצעים של המפלגות עצמן לפני שמחליטים משהו.</span></p>
+                    </div>
+                    <span class="fold-icon"><i class="fa-solid fa-chevron-down chev"></i></span>
+                </summary>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-start text-sm sm:text-base min-w-[760px]">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-slate-400">
+                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Party (leader)</span><span class="l-he">מפלגה (יו״ר)</span></th>
+                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Security and Palestinians</span><span class="l-he">ביטחון והפלסטינים</span></th>
+                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Haredi draft</span><span class="l-he">גיוס חרדים</span></th>
+                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Courts</span><span class="l-he">מערכת המשפט</span></th>
+                                <th class="py-2 font-semibold text-start"><span class="l-en">Oct 7 inquiry</span><span class="l-he">חקירת 7 באוקטובר</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="stance-table" class="text-slate-300 align-top"></tbody>
+                    </table>
+                </div>
+            </details>
+
+
+            <!-- US midterms note (election mode) -->
+            <div id="us-midterms-note" class="mb-10 p-4 sm:p-5 rounded-xl panel flex items-start gap-3">
+                <i class="fa-solid fa-envelope-open-text text-sky-400 mt-1 shrink-0"></i>
+                <p class="text-base text-slate-300 leading-relaxed"><span class="l-en"><strong class="text-ink">US citizens: there's a second election a week later.</strong> The US midterm elections are on <strong>3 November 2026</strong>: all 435 House seats, about a third of the Senate and many governors. Americans living abroad vote by absentee ballot through their last US state of residence. Rules and deadlines differ by state; <a href="https://www.fvap.gov" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">FVAP.gov</a> has the details.</span><span class="l-he"><strong class="text-ink">לאזרחי ארה״ב: יש עוד בחירות שבוע אחר כך.</strong> בחירות האמצע בארה״ב נערכות ב-<strong>3 בנובמבר 2026</strong>: כל 435 המושבים בבית הנבחרים, כשליש מהסנאט והרבה מושלים. אמריקאים שגרים בחו״ל מצביעים בדואר דרך המדינה האחרונה שבה גרו בארה״ב. הכללים והמועדים משתנים ממדינה למדינה; הפרטים באתר <a href="https://www.fvap.gov" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">FVAP.gov</a>.</span></p>
+            </div>
+
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- LEARN THE BASICS: the five parts                              -->
+        <!-- ============================================================ -->
+        <section id="learn" class="scroll-mt-28">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="h-px flex-1 bg-slate-600"></span>
+                <span class="text-sm font-semibold text-slate-400 uppercase tracking-wide"><span class="l-en">Learn the basics</span><span class="l-he">להבין את היסודות</span></span>
+                <span class="h-px flex-1 bg-slate-600"></span>
+            </div>
+            <h2 class="font-display text-3xl font-bold text-ink mb-2 text-center"><span class="l-en">How it all works, in five short parts</span><span class="l-he">איך כל זה עובד, בחמישה חלקים קצרים</span></h2>
+            <p class="text-lg text-slate-300 text-center max-w-2xl mx-auto mb-6"><span class="l-en">Pick a part, or go in order. Open "Read more" only when you want the details.</span><span class="l-he">בחרו חלק, או לכו לפי הסדר. פותחים את "לקרוא עוד" רק כשרוצים את הפרטים.</span></p>
+
+            <!-- Election 2026 switch: adds 2026 notes to the five parts -->
+            <div class="mb-6 rounded-2xl p-5 sm:p-6 border-2 border-amber-500/40 bg-amber-950 flex items-center justify-between gap-5 c5">
+                <div>
+                    <div class="font-display text-xl sm:text-2xl font-bold text-ink"><span class="l-en">Connect the lessons to the 2026 election</span><span class="l-he">לחבר את השיעורים לבחירות 2026</span></div>
+                    <p class="text-base text-slate-300 mt-1"><span class="l-en">Adds a 2026 note to each part's key idea, puts the real count into Part 1 and switches to an election quiz.</span><span class="l-he">מוסיף הערה על 2026 לרעיון המרכזי של כל חלק, מכניס לחלק 1 את הספירה האמיתית ומחליף לחידון על הבחירות.</span></p>
+                </div>
+                <button type="button" role="switch" id="election-switch" aria-checked="false" onclick="setAppMode(currentAppMode === 'election' ? 'basics' : 'election')" class="switch" aria-label="Election 2026">
+                    <span class="knob"></span>
+                </button>
+            </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <a href="#part-1" class="start-card c1">
                     <span class="start-icon"><i class="fa-solid fa-check-to-slot"></i></span>
@@ -350,7 +771,7 @@
                     <span class="start-icon"><i class="fa-solid fa-puzzle-piece"></i></span>
                     <span class="start-num"><span class="l-en">Part 5</span><span class="l-he">חלק 5</span></span>
                     <span class="font-display font-semibold text-xl text-ink leading-snug"><span class="l-en">Coalitions</span><span class="l-he">קואליציות</span></span>
-                    <span class="text-base text-slate-400 leading-snug"><span class="l-en">How 61 seats get put together. Includes a coalition builder for 2026.</span><span class="l-he">איך מרכיבים 61 מנדטים. כולל בונה קואליציה לבחירות 2026.</span></span>
+                    <span class="text-base text-slate-400 leading-snug"><span class="l-en">How 61 seats get put together, and what happens after election night.</span><span class="l-he">איך מרכיבים 61 מנדטים, ומה קורה אחרי ליל הבחירות.</span></span>
                 </a>
                 <a href="#quiz-section" class="start-card c6">
                     <span class="start-icon"><i class="fa-solid fa-circle-question"></i></span>
@@ -359,11 +780,7 @@
                     <span class="text-base text-slate-400 leading-snug"><span class="l-en">Test yourselves, then talk it over at dinner.</span><span class="l-he">בדקו את עצמכם, ואז דברו על זה סביב השולחן.</span></span>
                 </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-24">
+        </section>
 
         <!-- ============================================================ -->
         <!-- PART 1: TWO SYSTEMS                                           -->
@@ -988,7 +1405,7 @@
                 <span class="part-num" aria-hidden="true">5</span>
                 <div>
                     <div class="part-kicker"><span class="l-en">Part 5 of 5</span><span class="l-he">חלק 5 מתוך 5</span></div>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-ink leading-tight"><span class="l-en"><span class="basics-only">How coalitions work</span><span class="election-only hidden">How coalitions work, and the 2026 election</span></span><span class="l-he"><span class="basics-only">איך קואליציות עובדות</span><span class="election-only hidden">איך קואליציות עובדות, והבחירות של 2026</span></span></h2>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-ink leading-tight"><span class="l-en">How coalitions work</span><span class="l-he">איך קואליציות עובדות</span></h2>
                     <p class="part-lead"><span class="l-en">In Israel, winning the most seats doesn't make you Prime Minister. Being able to bring 61 Knesset members together does.</span><span class="l-he">בישראל, הכי הרבה מנדטים לא הופכים אותך לראש ממשלה. מה שקובע הוא היכולת לחבר יחד 61 חברי כנסת.</span></p>
                 </div>
             </div>
@@ -997,170 +1414,6 @@
                 <p id="key-idea-5" class="text-lg text-slate-200 leading-relaxed"></p>
             </div>
 
-            <!-- Election 2026 switch -->
-            <div class="mb-10 rounded-2xl p-5 sm:p-6 border-2 border-amber-500/40 bg-amber-950 flex items-center justify-between gap-5">
-                <div>
-                    <div class="font-display text-xl sm:text-2xl font-bold text-ink"><span class="l-en">Add the 27 October 2026 election</span><span class="l-he">להוסיף את הבחירות של 27 באוקטובר 2026</span></div>
-                    <p class="text-base text-slate-300 mt-1"><span class="l-en">Adds a coalition builder you can play with, the main issues, where each party stands and an election quiz.</span><span class="l-he">מוסיף בונה קואליציה שאפשר לשחק איתו, את הנושאים המרכזיים, את עמדות המפלגות וחידון על הבחירות.</span></p>
-                </div>
-                <button type="button" role="switch" id="election-switch" aria-checked="false" onclick="setAppMode(currentAppMode === 'election' ? 'basics' : 'election')" class="switch" aria-label="Election 2026">
-                    <span class="knob"></span>
-                </button>
-            </div>
-
-            <!-- ===== ELECTION 2026 SECTION (shown only in Election 2026 mode) ===== -->
-            <div class="election-only hidden">
-            <div class="mb-6 flex items-center gap-3">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-200 text-sm font-semibold"><i class="fa-solid fa-check-to-slot"></i><span class="l-en">Election 2026</span><span class="l-he">בחירות 2026</span></span>
-                <span class="h-px flex-1 bg-amber-500/30"></span>
-            </div>
-            <!-- Coalition builder -->
-            <div class="panel rounded-2xl p-5 sm:p-8 border-2 border-slate-600 mb-10">
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-6 border-b border-slate-700">
-                    <div>
-                        <div class="text-sm font-semibold text-sky-400 mb-1"><i class="fa-solid fa-puzzle-piece me-1.5"></i><span class="l-en">Try it</span><span class="l-he">נסו בעצמכם</span></div>
-                        <h3 class="font-display text-2xl sm:text-3xl font-bold text-ink"><span class="l-en">Build a 61-seat coalition</span><span class="l-he">הרכיבו קואליציה של 61</span></h3>
-                        <p class="text-base text-slate-300 mt-1"><span class="l-en">Seats are the average of polls as of <span class="poll-date-en"></span>, not results. Click parties to add or remove them, or start from a scenario.</span><span class="l-he">המנדטים הם ממוצע הסקרים נכון ל-<span class="poll-date-he"></span>, לא תוצאות. לחצו על מפלגות כדי להוסיף או להוריד אותן, או התחילו מתרחיש מוכן.</span></p>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button type="button" onclick="loadCoalitionPreset('netanyahu')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-600 text-sm font-semibold text-slate-200 transition"><span class="l-en">Netanyahu's bloc</span><span class="l-he">גוש נתניהו</span></button>
-                        <button type="button" onclick="loadCoalitionPreset('opposition')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-600 text-sm font-semibold text-slate-200 transition"><span class="l-en">Opposition bloc</span><span class="l-he">גוש האופוזיציה</span></button>
-                        <button type="button" onclick="loadCoalitionPreset('opposition-raam')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-600 text-sm font-semibold text-slate-200 transition"><span class="l-en">Opposition + Ra'am (2021 model)</span><span class="l-he">אופוזיציה + רע״ם (מודל 2021)</span></button>
-                        <button type="button" onclick="loadCoalitionPreset('clear')" class="px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sm font-semibold text-slate-400 transition"><i class="fa-solid fa-rotate-left me-1"></i><span class="l-en">Clear</span><span class="l-he">ניקוי</span></button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-8">
-                    <div class="lg:col-span-5 panel-deep rounded-2xl p-4 flex flex-col items-center">
-                        <div class="text-sm font-semibold text-slate-400 mb-1"><span class="l-en">The 120-seat Knesset</span><span class="l-he">120 המושבים בכנסת</span></div>
-                        <svg id="knesset-hemicycle" viewBox="0 0 360 190" class="w-full max-w-sm" role="img" aria-label="Knesset seat map"></svg>
-                        <div class="text-center -mt-8">
-                            <div id="hemicycle-seat-number" class="font-display text-4xl font-bold text-ink" dir="ltr">0</div>
-                            <div id="hemicycle-status-badge" class="inline-block mt-1 px-3 py-1 rounded-full text-sm font-semibold"></div>
-                        </div>
-                        <p class="text-sm text-slate-500 mt-3 text-center"><span class="l-en">Bright seats are in your coalition. Parties are arranged roughly from left to right.</span><span class="l-he">המושבים הבהירים הם בקואליציה שלכם. המפלגות מסודרות בערך משמאל (פוליטי) לימין (פוליטי).</span></p>
-                    </div>
-
-                    <div class="lg:col-span-7 space-y-5">
-                        <div class="panel-deep p-5 rounded-2xl">
-                            <div class="flex justify-between items-end mb-2 gap-2">
-                                <span class="text-sm font-semibold text-slate-400"><span class="l-en">Seats in your coalition</span><span class="l-he">מנדטים בקואליציה שלכם</span></span>
-                                <span id="coalition-math-summary" class="text-base font-semibold"></span>
-                            </div>
-                            <div class="relative w-full h-9 bg-slate-900 rounded-lg overflow-hidden flex border border-slate-800" id="coalition-stacked-bar"></div>
-                            <div class="relative w-full h-6 mt-1">
-                                <div class="absolute start-[50.83%] mark-center flex flex-col items-center">
-                                    <div class="w-0.5 h-2 bg-amber-400"></div>
-                                    <span class="text-xs font-semibold text-amber-300 whitespace-nowrap">61</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel-deep p-5 rounded-2xl">
-                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                                <span class="text-sm font-semibold text-slate-400"><span class="l-en">Red lines and tensions</span><span class="l-he">קווים אדומים ומתחים</span></span>
-                                <span id="stability-badge" class="text-sm font-semibold px-2.5 py-0.5 rounded"></span>
-                            </div>
-                            <div id="friction-messages" class="space-y-2 text-base text-slate-300"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="threshold-panel" class="mb-6 p-4 sm:p-5 rounded-2xl panel-deep border border-amber-500/30"></div>
-
-                <div id="party-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-                <p class="text-sm text-slate-500 mt-4"><span class="l-en">Polls differ from each other. A list that gets in is assumed to win 4 seats, the minimum for passing 3.25%. Red lines are what leaders have said publicly; they often change after election day.</span><span class="l-he">הסקרים שונים זה מזה. רשימה שעוברת מקבלת כאן 4 מנדטים, המינימום למי שעובר את 3.25%. הקווים האדומים הם מה שהמנהיגים אמרו בפומבי, ולעיתים קרובות הם משתנים אחרי הבחירות.</span></p>
-            </div>
-            <!-- Issues -->
-            <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
-                <h3 class="font-display text-2xl font-bold text-ink"><span class="l-en">The main issues in the 27 October 2026 election</span><span class="l-he">הנושאים המרכזיים בבחירות של 27 באוקטובר 2026</span></h3>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-                <div class="panel rounded-2xl p-5">
-                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">1. October 7 accountability and security</span><span class="l-he">1. האחריות ל-7 באוקטובר והביטחון</span></h4>
-                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">Who is responsible for the failures of October 7, 2023, and how should Israel handle Gaza, Lebanon and Iran from here?</span><span class="l-he">מי אחראי למחדלים של 7 באוקטובר 2023, ואיך ישראל צריכה להתמודד מכאן עם עזה, לבנון ואיראן?</span></p>
-                    <details class="more">
-                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
-                            <div class="more-body text-base text-slate-300 space-y-2">
-                        <p><span class="l-en"><strong class="text-ink">Opposition parties</strong> want a <strong>State Commission of Inquiry</strong> <span class="gloss">ועדת חקירה ממלכתית</span>. Under a 1968 law, the Supreme Court's President picks its members, and it can summon anyone, including the Prime Minister.</span><span class="l-he"><strong class="text-ink">מפלגות האופוזיציה</strong> רוצות <strong>ועדת חקירה ממלכתית</strong>. לפי חוק מ-1968, נשיא בית המשפט העליון בוחר את חבריה, והיא יכולה לזמן כל אחד, כולל ראש הממשלה.</span></p>
-                        <p><span class="l-en"><strong class="text-ink">The governing coalition</strong> rejects a court-chosen panel as biased against the right, and has backed an inquiry whose members would be chosen in a politically balanced way.</span><span class="l-he"><strong class="text-ink">הקואליציה</strong> דוחה ועדה שבית המשפט בוחר את חבריה, בטענה שהיא מוטה נגד הימין, ותומכת בוועדת חקירה שחבריה ייבחרו באופן מאוזן פוליטית.</span></p>
-                            </div>
-                        </details>
-                </div>
-
-                <div class="panel rounded-2xl p-5">
-                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">2. Drafting Haredi men <span class="gloss">שוויון בנטל</span></span><span class="l-he">2. גיוס חרדים ושוויון בנטל</span></h4>
-                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">Reservists have served hundreds of days since October 2023, and the army says it is short of thousands of soldiers. Should Haredi yeshiva students be drafted like everyone else?</span><span class="l-he">אנשי מילואים שירתו מאות ימים מאז אוקטובר 2023, והצבא אומר שחסרים לו אלפי חיילים. האם צריך לגייס תלמידי ישיבות חרדים כמו את כולם?</span></p>
-                    <details class="more">
-                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
-                            <div class="more-body text-base text-slate-300 space-y-2">
-                        <p><span class="l-en"><strong class="text-ink">2024:</strong> the Supreme Court ruled that there is no legal basis for a blanket exemption, ordered the army to draft yeshiva students and stopped state funding for yeshivas whose students should be serving.</span><span class="l-he"><strong class="text-ink">2024:</strong> בית המשפט העליון קבע שאין בסיס חוקי לפטור גורף, הורה לצבא לגייס תלמידי ישיבות ועצר את המימון הממשלתי לישיבות שתלמידיהן אמורים לשרת.</span></p>
-                        <p><span class="l-en"><strong class="text-ink">July 2025:</strong> UTJ quit the coalition and Shas left the government over the failure to pass a law protecting the exemption.</span><span class="l-he"><strong class="text-ink">יולי 2025:</strong> יהדות התורה פרשה מהקואליציה וש״ס יצאה מהממשלה, אחרי שלא עבר חוק שמעגן את הפטור.</span></p>
-                        <p><span class="l-en"><strong class="text-ink">Positions:</strong> Shas and UTJ want exemptions written into law. Yisrael Beiteinu, Yashar, Together and the Democrats want service for all, with penalties for those who refuse. Likud has backed gradual targets agreed with Haredi leaders.</span><span class="l-he"><strong class="text-ink">העמדות:</strong> ש״ס ויהדות התורה רוצות לעגן את הפטור בחוק. ישראל ביתנו, ישר!, ביחד והדמוקרטים רוצים שירות לכולם, עם סנקציות על מי שמסרב. הליכוד תמך ביעדי גיוס הדרגתיים בהסכמה עם ההנהגה החרדית.</span></p>
-                            </div>
-                        </details>
-                </div>
-
-                <div class="panel rounded-2xl p-5">
-                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">3. The courts, round two</span><span class="l-he">3. מערכת המשפט, סיבוב שני</span></h4>
-                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">Should the next Knesset finish the changes to the courts, or protect the court's independence in a written constitution?</span><span class="l-he">האם הכנסת הבאה צריכה להשלים את השינויים במערכת המשפט, או לעגן את עצמאות בית המשפט בחוקה כתובה?</span></p>
-                    <details class="more">
-                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
-                            <div class="more-body text-base text-slate-300 space-y-2">
-                        <p><span class="l-en"><strong class="text-ink">Already law:</strong> the March 2025 Judicial Selection Law gives politicians more say in choosing judges. It takes effect with the new Knesset, so the next government will be the first to use it, or to change it.</span><span class="l-he"><strong class="text-ink">כבר בחוק:</strong> החוק לבחירת שופטים ממרץ 2025 נותן לפוליטיקאים יותר השפעה על בחירת השופטים. הוא נכנס לתוקף עם הכנסת החדשה, ולכן הממשלה הבאה תהיה הראשונה שתשתמש בו, או תשנה אותו.</span></p>
-                        <p><span class="l-en"><strong class="text-ink">The coalition parties</strong> say court rulings since 2023 (cancelling the reasonableness law, ordering the Haredi draft, overturning the Attorney General's firing) prove the court has too much power.</span><span class="l-he"><strong class="text-ink">מפלגות הקואליציה</strong> אומרות שהפסיקות מאז 2023 (ביטול חוק הסבירות, ההוראה לגייס חרדים, ביטול פיטורי היועמ״שית) מוכיחות שלבית המשפט יש יותר מדי כוח.</span></p>
-                        <p><span class="l-en"><strong class="text-ink">The opposition parties</strong> pledge to protect the court's independence, and Bennett has proposed a written constitution.</span><span class="l-he"><strong class="text-ink">מפלגות האופוזיציה</strong> מתחייבות להגן על עצמאות בית המשפט, ובנט הציע לכתוב חוקה.</span></p>
-                            </div>
-                        </details>
-                </div>
-
-                <div class="panel rounded-2xl p-5">
-                    <h4 class="font-display text-lg font-bold text-ink mb-2"><span class="l-en">4. The cost of war and the cost of living</span><span class="l-he">4. מחיר המלחמה ויוקר המחיה</span></h4>
-                    <p class="text-base text-slate-300 leading-relaxed"><span class="l-en">The war has cost hundreds of billions of shekels and VAT rose to 18% in 2025. How should Israel pay for defense, bring down prices and keep its high-tech sector (about half of all exports) in the country?</span><span class="l-he">המלחמה עלתה מאות מיליארדי שקלים והמע״מ עלה ל-18% ב-2025. איך ישראל צריכה לממן את הביטחון, להוריד מחירים ולשמור כאן את ההייטק (כמחצית מכלל הייצוא)?</span></p>
-                    <details class="more">
-                            <summary class="more-btn"><span class="when-closed"><span class="l-en">Who wants what</span><span class="l-he">מי רוצה מה</span></span><span class="when-open"><span class="l-en">Show less</span><span class="l-he">להסתיר</span></span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary>
-                            <div class="more-body text-base text-slate-300 space-y-2">
-                        <p><span class="l-en"><strong class="text-ink">The trade-off:</strong> many economists warn that a larger army, plus large budgets for coalition partners' communities, can't both be funded without higher taxes on the working middle class. The coalition parties answer that those budgets support large, lower-income families and the institutions they rely on.</span><span class="l-he"><strong class="text-ink">הדילמה:</strong> כלכלנים רבים מזהירים שאי אפשר לממן גם צבא גדול יותר וגם תקציבים גדולים לציבורים של שותפות קואליציוניות בלי להעלות מסים על מעמד הביניים העובד. מפלגות הקואליציה עונות שהתקציבים האלה תומכים במשפחות גדולות ומעוטות הכנסה ובמוסדות שהן נשענות עליהם.</span></p>
-                            </div>
-                        </details>
-                </div>
-            </div>
-
-            <!-- Where parties stand (election mode) -->
-            <details class="fold election-only hidden panel rounded-2xl p-5 sm:p-6 mb-10">
-                <summary>
-                    <div>
-                <h3 class="font-display text-2xl font-bold text-ink"><span class="l-en">Where the parties stand</span><span class="l-he">איפה המפלגות עומדות</span></h3>
-                <p class="text-base text-slate-400 mt-1"><span class="l-en">A simplified summary of each list's main positions. Read the parties' own platforms before deciding anything.</span><span class="l-he">סיכום פשוט של העמדות המרכזיות של כל רשימה. כדאי לקרוא את המצעים של המפלגות עצמן לפני שמחליטים משהו.</span></p>
-                    </div>
-                    <span class="fold-icon"><i class="fa-solid fa-chevron-down chev"></i></span>
-                </summary>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-start text-sm sm:text-base min-w-[760px]">
-                        <thead>
-                            <tr class="border-b border-slate-700 text-slate-400">
-                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Party (leader)</span><span class="l-he">מפלגה (יו״ר)</span></th>
-                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Security and Palestinians</span><span class="l-he">ביטחון והפלסטינים</span></th>
-                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Haredi draft</span><span class="l-he">גיוס חרדים</span></th>
-                                <th class="py-2 pe-3 font-semibold text-start"><span class="l-en">Courts</span><span class="l-he">מערכת המשפט</span></th>
-                                <th class="py-2 font-semibold text-start"><span class="l-en">Oct 7 inquiry</span><span class="l-he">חקירת 7 באוקטובר</span></th>
-                            </tr>
-                        </thead>
-                        <tbody id="stance-table" class="text-slate-300 align-top"></tbody>
-                    </table>
-                </div>
-            </details>
-
-
-            <!-- US midterms note (election mode) -->
-            <div class="election-only hidden mb-10 p-4 sm:p-5 rounded-xl panel flex items-start gap-3">
-                <i class="fa-solid fa-envelope-open-text text-sky-400 mt-1 shrink-0"></i>
-                <p class="text-base text-slate-300 leading-relaxed"><span class="l-en"><strong class="text-ink">US citizens: there's a second election a week later.</strong> The US midterm elections are on <strong>3 November 2026</strong>: all 435 House seats, about a third of the Senate and many governors. Americans living abroad vote by absentee ballot through their last US state of residence. Rules and deadlines differ by state; <a href="https://www.fvap.gov" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">FVAP.gov</a> has the details.</span><span class="l-he"><strong class="text-ink">לאזרחי ארה״ב: יש עוד בחירות שבוע אחר כך.</strong> בחירות האמצע בארה״ב נערכות ב-<strong>3 בנובמבר 2026</strong>: כל 435 המושבים בבית הנבחרים, כשליש מהסנאט והרבה מושלים. אמריקאים שגרים בחו״ל מצביעים בדואר דרך המדינה האחרונה שבה גרו בארה״ב. הכללים והמועדים משתנים ממדינה למדינה; הפרטים באתר <a href="https://www.fvap.gov" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">FVAP.gov</a>.</span></p>
-            </div>
-
-            </div>
-            <!-- ===== END ELECTION 2026 SECTION ===== -->
 
 
             <!-- How a PM is chosen -->
@@ -1295,12 +1548,14 @@
                 <summary>
                     <div>
             <h3 class="font-display text-2xl font-bold text-ink"><span class="l-en">Sources and where to check</span><span class="l-he">מקורות ואיפה לבדוק</span></h3>
-            <p class="text-base text-slate-400"><span class="l-en">Facts on this page were checked against these sources in October 2026. Poll numbers change daily. Most sources are in English.</span><span class="l-he">העובדות בעמוד נבדקו מול המקורות האלה באוקטובר 2026. מספרי הסקרים משתנים כל יום. רוב המקורות באנגלית.</span></p>
+            <p class="text-base text-slate-400"><span class="l-en">Facts on this page were checked against these sources in October 2026. The count is refreshed every 3 hours and the coalition talks every morning. Most sources are in English.</span><span class="l-he">העובדות בעמוד נבדקו מול המקורות האלה באוקטובר 2026. הספירה מתעדכנת כל 3 שעות והמגעים הקואליציוניים כל בוקר. רוב המקורות באנגלית.</span></p>
                     </div>
                     <span class="fold-icon"><i class="fa-solid fa-chevron-down chev"></i></span>
                 </summary>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-base">
-                <a class="text-sky-400 hover:underline" href="https://israelvote.meforum.org/" target="_blank" rel="noopener noreferrer"><span class="l-en">Poll of polls for the 2026 election (seat averages, <span class="poll-date-en"></span>)</span><span class="l-he">ממוצע הסקרים לבחירות 2026 (נכון ל-<span class="poll-date-he"></span>)</span></a>
+                <a class="text-sky-400 hover:underline" href="https://votes26.bechirot.gov.il/" target="_blank" rel="noopener noreferrer"><span class="l-en">Central Elections Committee: official results (works from Israel only)</span><span class="l-he">ועדת הבחירות המרכזית: התוצאות הרשמיות (נגיש רק מישראל)</span></a>
+                <a class="text-sky-400 hover:underline" href="https://www.thepetek.com/results" target="_blank" rel="noopener noreferrer"><span class="l-en">The Petek: live count and projected seats (where this site reads the count)</span><span class="l-he">The Petek: הספירה והמנדטים הצפויים (משם האתר קורא את הספירה)</span></a>
+                <a class="text-sky-400 hover:underline" href="https://israelvote.meforum.org/" target="_blank" rel="noopener noreferrer"><span class="l-en">Poll of polls before the election (final average, <span class="poll-date-en"></span>)</span><span class="l-he">ממוצע הסקרים לפני הבחירות (הממוצע האחרון, <span class="poll-date-he"></span>)</span></a>
                 <a class="text-sky-400 hover:underline" href="https://en.wikipedia.org/wiki/2026_Israeli_legislative_election" target="_blank" rel="noopener noreferrer"><span class="l-en">2026 Israeli legislative election: overview and party lists</span><span class="l-he">הבחירות לכנסת 2026: סקירה ורשימות המפלגות</span></a>
                 <a class="text-sky-400 hover:underline" href="https://www.jta.org/2026/10/13/israel/checkmate-netanyahu-faces-a-daunting-playing-field-ahead-of-oct-27" target="_blank" rel="noopener noreferrer"><span class="l-en">JTA: the playing field two weeks before the election (bloc math, red lines)</span><span class="l-he">JTA: המפה שבועיים לפני הבחירות (חשבון הגושים, קווים אדומים)</span></a>
                 <a class="text-sky-400 hover:underline" href="https://en.globes.co.il/en/article-knesset-passes-judicial-selection-law-1001506201" target="_blank" rel="noopener noreferrer"><span class="l-en">Globes: Knesset passes the Judicial Selection Law (March 2025)</span><span class="l-he">גלובס: הכנסת מאשרת את החוק לבחירת שופטים (מרץ 2025)</span></a>
@@ -1321,7 +1576,7 @@
     <footer class="border-t border-slate-800 bg-slate-950 py-8 mt-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-400">
             <div><span class="l-en"><strong class="text-slate-200">Politics Decoded: US vs. Israel</strong> · A family civics guide</span><span class="l-he"><strong class="text-slate-200">פוליטיקה בפשטות: ארה״ב מול ישראל</strong> · מדריך משפחתי לאזרחות</span></div>
-            <div><span class="l-en">Poll figures as of <span class="poll-date-en"></span> · checked automatically every morning</span><span class="l-he">נתוני הסקרים נכונים ל-<span class="poll-date-he"></span> · נבדקים אוטומטית כל בוקר</span></div>
+            <div><span class="l-en">Count as of <span class="update-date-en"></span> · refreshed every 3 hours, coalition talks every morning</span><span class="l-he">הספירה נכונה ל-<span class="update-date-he"></span> · מתעדכנת כל 3 שעות, המגעים הקואליציוניים כל בוקר</span></div>
         </div>
     </footer>
 
@@ -1379,9 +1634,13 @@
                 },
             },
             election: {
-                key1: {
-                    en: 'About 155,000 votes are needed to pass the threshold. A vote for a party that ends up at 3% wins no seats, which in practice helps the other camp. That is why parties merge before elections: Labor and Meretz became the Democrats in 2024, Bennett and Lapid formed Together in 2026 and the Joint List re-formed. About 38 lists are running this year; no more than about 15 are expected to get in.',
-                    he: 'כדי לעבור את אחוז החסימה צריך כ-155,000 קולות. קול למפלגה שמסיימת עם 3% לא מביא מנדטים, ובפועל עוזר למחנה השני. לכן מפלגות מתאחדות לפני בחירות: העבודה ומרצ הפכו לדמוקרטים ב-2024, בנט ולפיד הקימו את ביחד ב-2026 והרשימה המשותפת קמה מחדש. השנה רצות כ-38 רשימות, וצפוי שלא יותר מכ-15 ייכנסו.'
+                key1: () => {
+                    const inNow = parties.filter(p => p.seats > 0).length;
+                    const out = parties.filter(p => p.result && !(p.seats > 0)).map(p => p.name);
+                    return {
+                        en: `With about 5.7 million votes cast, a list needed roughly 185,000 to pass the threshold. A vote for a party that ends up at 3% wins no seats, which in practice helps the other camp. That is why parties merge before elections: Labor and Meretz became the Democrats in 2024, Bennett and Lapid formed Together in 2026 and the Joint List re-formed. About 38 lists ran; ${inNow} are in the Knesset in the count so far.` + (out.length ? ` ${out.map(n => n.en).join(' and ')} ${out.length === 1 ? 'is' : 'are'} below the line.` : ''),
+                        he: `כ-5.7 מיליון אזרחים הצביעו, ולכן רשימה הייתה צריכה בערך 185,000 קולות כדי לעבור את אחוז החסימה. קול למפלגה שמסיימת עם 3% לא מביא מנדטים, ובפועל עוזר למחנה השני. לכן מפלגות מתאחדות לפני בחירות: העבודה ומרצ הפכו לדמוקרטים ב-2024, בנט ולפיד הקימו את ביחד ב-2026 והרשימה המשותפת קמה מחדש. רצו כ-38 רשימות; לפי הספירה עד כה ${inNow} נכנסו לכנסת.` + (out.length ? ` ${out.map(n => n.he).join(' ו')} מתחת לקו.` : '')
+                    };
                 },
                 key2: {
                     en: "When reading a party's platform, look at its answers to the two questions separately: security, then religion, the Haredi draft and the courts. Then check who it says it will and won't sit with after the election. That often matters more than the platform.",
@@ -1415,37 +1674,23 @@
             const he = lang === 'he';
             const el = document.getElementById('mode-toast');
             const msg = currentAppMode === 'election'
-                ? (he ? '<strong>בחירות 2026:</strong> נוספו לחלק 5 הנושאים, עמדות המפלגות, הסקרים ובונה הקואליציה, וגם חידון חדש.'
-                      : '<strong>Election 2026:</strong> Part 5 now includes the issues, where each party stands, the polls and the coalition builder. The quiz has changed too.')
-                : (he ? '<strong>סקירה כללית:</strong> החלקים על בחירות 2026 מוסתרים.'
-                      : '<strong>Overview:</strong> the 2026 election sections are hidden.');
-            const link = currentAppMode === 'election' ? `<a href="#part-5" class="underline font-semibold ms-2" onclick="hideModeToast()">${he ? 'לחלק 5' : 'Go to Part 5'}</a>` : '';
-            el.innerHTML = `<div class="flex items-start gap-3"><i class="fa-solid fa-circle-info text-sky-400 mt-1"></i><div>${msg}${link}</div><button type="button" onclick="hideModeToast()" class="ms-auto text-slate-400 hover:text-ink" aria-label="${he ? 'סגירה' : 'Close'}"><i class="fa-solid fa-xmark"></i></button></div>`;
+                ? (he ? '<strong>בחירות 2026:</strong> לכל חלק נוספה הערה על 2026, חלק 1 מציג את הספירה האמיתית והחידון הוחלף.'
+                      : '<strong>Election 2026:</strong> each part now has a 2026 note, Part 1 shows the real count and the quiz has changed.')
+                : (he ? '<strong>סקירה כללית:</strong> ההערות על 2026 מוסתרות.'
+                      : '<strong>Overview:</strong> the 2026 notes are hidden.');
+            el.innerHTML = `<div class="flex items-start gap-3"><i class="fa-solid fa-circle-info text-sky-400 mt-1"></i><div>${msg}</div><button type="button" onclick="hideModeToast()" class="ms-auto text-slate-400 hover:text-ink" aria-label="${he ? 'סגירה' : 'Close'}"><i class="fa-solid fa-xmark"></i></button></div>`;
             el.classList.remove('hidden');
             clearTimeout(toastTimer);
             toastTimer = setTimeout(hideModeToast, 7000);
         }
         function hideModeToast() { document.getElementById('mode-toast').classList.add('hidden'); }
 
-        function renderCountdown() {
-            const el = document.getElementById('election-countdown');
-            const now = new Date();
-            const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-            const days = Math.round((Date.UTC(2026, 9, 27) - today) / 86400000);
-            const he = lang === 'he';
-            if (days > 1) el.textContent = he ? `יום הבחירות: 27 באוקטובר 2026, בעוד ${days} ימים` : `Election day: 27 October 2026, in ${days} days`;
-            else if (days === 1) el.textContent = he ? 'יום הבחירות: מחר, 27 באוקטובר 2026' : 'Election day: tomorrow, 27 October 2026';
-            else if (days === 0) el.textContent = he ? 'היום יום הבחירות' : 'Today is election day';
-            else el.textContent = he ? 'הבחירות נערכו ב-27 באוקטובר 2026' : 'The election was held on 27 October 2026';
-        }
-
         function renderMode() {
-            // Election 2026 switch in Part 5
+            // Election 2026 switch (above the five parts)
             const sw = document.getElementById('election-switch');
             const onElection = currentAppMode === 'election';
             sw.setAttribute('aria-checked', onElection ? 'true' : 'false');
             sw.classList.toggle('on', onElection);
-            renderCountdown();
             // The key idea is always the Overview one. With the election switched on, a 2026 note is added below it.
             const label = lang === 'he' ? 'הרעיון המרכזי:' : 'Key idea:';
             const label26 = lang === 'he' ? 'בבחירות 2026:' : 'In the 2026 election:';
@@ -1516,17 +1761,17 @@
                 redline: { en: "Won't sit with Netanyahu. Has ruled out another partnership with Arab parties: partners must accept Israel as Jewish and democratic and do national service.", he: 'לא תשב עם נתניהו. שללה שותפות נוספת עם מפלגות ערביות: השותפות צריכות לקבל את ישראל כמדינה יהודית ודמוקרטית ולשרת שירות לאומי.' }
             },
             {
-                id: 'bluewhite', seats: 0, short: { en: 'Gantz', he: 'גנץ' }, threshold: true, color: '#60a5fa', ink: '#0f172a',
+                id: 'bluewhite', seats: 0, short: { en: 'Gantz', he: 'גנץ' }, threshold: true, withdrew: true, color: '#60a5fa', ink: '#0f172a',
                 name: { en: 'Blue and White', he: 'כחול לבן' },
                 leader: { en: 'Benny Gantz', he: 'בני גנץ' },
-                desc: { en: "Former army chief Benny Gantz's centrist party. It led many polls in 2024, but has fallen to around 1%.", he: 'מפלגת המרכז של הרמטכ״ל לשעבר בני גנץ. הובילה סקרים רבים ב-2024, אבל ירדה לכ-1%.' },
+                desc: { en: "Former army chief Benny Gantz's centrist party. It led many polls in 2024, fell to around 1% and withdrew from the race on 19 October 2026.", he: 'מפלגת המרכז של הרמטכ״ל לשעבר בני גנץ. הובילה סקרים רבים ב-2024, ירדה לכ-1% ופרשה מהמרוץ ב-19 באוקטובר 2026.' },
                 stance: {
                     sec: { en: 'Centrist; security first', he: 'מרכז; ביטחון קודם' },
                     draft: { en: 'Service for all', he: 'שירות לכולם' },
                     court: { en: 'Opposed the 2023 changes', he: 'התנגדה לשינויים של 2023' },
                     inquiry: { en: 'State commission', he: 'ועדה ממלכתית' }
                 },
-                redline: { en: 'Gantz says that if he gets in, he would seek a unity government that includes both Netanyahu and the opposition.', he: 'גנץ אומר שאם יעבור, ינסה להקים ממשלת אחדות שתכלול גם את נתניהו וגם את האופוזיציה.' }
+                redline: { en: 'Before withdrawing, Gantz said he would seek a unity government including both Netanyahu and the opposition.', he: 'לפני שפרש, גנץ אמר שינסה להקים ממשלת אחדות שתכלול גם את נתניהו וגם את האופוזיציה.' }
             },
             {
                 id: 'together', seats: 12, short: { en: 'Bennett-Lapid', he: 'בנט-לפיד' }, color: '#f59e0b', ink: '#1c1917',
@@ -1647,36 +1892,69 @@
             }
         ];
 
-        // ---- Poll data (from the poll-data block, refreshed daily by the update script) ----
+        // ---- Election data: the count, the coalition talks and the last poll average before the vote ----
+        // results-data and coalition-data are rewritten by scripts/update_site.py; poll-data is frozen.
         const POLL = JSON.parse(document.getElementById('poll-data').textContent);
+        const RESULTS = JSON.parse(document.getElementById('results-data').textContent || '{}');
+        const COALITION = JSON.parse(document.getElementById('coalition-data').textContent || '{}');
+        const HAS_RESULTS = !!(RESULTS.parties && Object.keys(RESULTS.parties).length);
+        const COUNT_FINAL = RESULTS.status === 'final';
         parties.forEach(p => {
-            const s = POLL.seats[p.id];
-            p.threshold = !(s > 0);          // not in the poll average = shown in the "On the threshold" panel
+            p.result = HAS_RESULTS ? (RESULTS.parties[p.id] || null) : null;
+            p.pollSeats = POLL.seats[p.id] || 0;
+            const s = HAS_RESULTS ? (p.result ? p.result.seats : 0) : POLL.seats[p.id];
+            p.threshold = !(s > 0);          // not in the Knesset in the count = shown below the line
             p.seats = s > 0 ? s : 0;
         });
-        function pollDate(l) {
-            const d = new Date(POLL.asOf + 'T12:00:00Z');
-            return d.toLocaleDateString(l === 'he' ? 'he-IL' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+        // Everything Claude writes is shown as plain text, never as HTML
+        const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+        const safeUrl = u => /^https:\/\/[^\s"'<>]+$/.test(u || '') ? u : '#';
+        const fmtDate = (iso, l, withTime) => {
+            if (!iso) return '';
+            const d = new Date(iso.length === 10 ? iso + 'T12:00:00Z' : iso);
+            const opts = { day: 'numeric', month: 'long', timeZone: 'Asia/Jerusalem' };
+            if (withTime) Object.assign(opts, { hour: '2-digit', minute: '2-digit', hour12: false });
+            return d.toLocaleString(l === 'he' ? 'he-IL' : 'en-GB', opts);
+        };
+        const daysUntil = iso => {
+            const now = new Date(), today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+            const [y, m, d] = iso.split('-').map(Number);
+            return Math.round((Date.UTC(y, m - 1, d) - today) / 86400000);
+        };
+        const fmtPct = x => x >= 4 ? x.toFixed(1) : x.toFixed(2);   // same precision as The Petek
+        function pollDate(l) { return fmtDate(POLL.asOf, l) + (l === 'he' ? '' : ' 2026'); }
+        function updateDate(l) { return HAS_RESULTS ? fmtDate(RESULTS.asOf, l, true) : fmtDate(COALITION.updated, l); }
+        function countShort(l) {
+            if (!HAS_RESULTS) return l === 'he' ? 'עדיין אין ספירה' : 'no count yet';
+            if (COUNT_FINAL) return l === 'he' ? 'התוצאות הרשמיות' : 'official results';
+            return RESULTS.reporting != null
+                ? (l === 'he' ? `${RESULTS.reporting}% מהקולות נספרו` : `${RESULTS.reporting}% of ballots counted`)
+                : (l === 'he' ? 'הספירה הסתיימה, עדיין לא רשמי' : 'count finished, not yet official');
         }
-        function pollNote(p) {
-            const n = POLL.nearThreshold[p.id];
-            if (!n) return { en: 'Not in the latest poll average', he: 'לא מופיעה בממוצע הסקרים האחרון' };
-            const passing = Math.round(n.polls * (100 - n.pollsUnderPct) / 100);
-            if (passing === 0) return {
-                en: `Polling about ${n.shareWhenUnder}%, below the threshold in every recent poll`,
-                he: `כ-${n.shareWhenUnder}% בסקרים, מתחת לאחוז החסימה בכל הסקרים האחרונים`
-            };
-            return {
-                en: `Averaging about ${n.meanSeats} seats; passes the threshold in ${passing} of ${n.polls} recent polls`,
-                he: `ממוצע של כ-${n.meanSeats} מנדטים; עוברת את אחוז החסימה ב-${passing} מתוך ${n.polls} הסקרים האחרונים`
-            };
+
+        // Parties below the line: what the count says about each one
+        function thresholdNote(p) {
+            if (p.withdrew) return { en: 'Withdrew from the race on 19 October', he: 'פרשה מהמרוץ ב-19 באוקטובר' };
+            if (!p.result) return { en: 'Not in the count', he: 'לא מופיעה בספירה' };
+            const short = Math.max(0, Math.round((3.25 - p.result.pct) / 100 * RESULTS.validVotes / 1000) * 1000);
+            return COUNT_FINAL
+                ? { en: `${fmtPct(p.result.pct)}% of the vote; needed 3.25%`, he: `${fmtPct(p.result.pct)}% מהקולות; היה צריך 3.25%` }
+                : { en: `${fmtPct(p.result.pct)}% so far; needs 3.25%, about ${num(short)} more votes at this point in the count`,
+                    he: `${fmtPct(p.result.pct)}% עד כה; צריך 3.25%, כ-${num(short)} קולות נוספים בשלב הזה של הספירה` };
         }
+        // Lists close enough to the line that "what if it gets in?" is worth asking (only while counting)
+        const nearLine = () => COUNT_FINAL ? [] : parties.filter(p => p.threshold && !p.withdrew && p.result && p.result.pct >= 2);
+
+        const BLOC_IDS = {
+            netanyahu: ['likud', 'shas', 'utj', 'rzp', 'otzma', 'amcha'],
+            opposition: ['yashar', 'together', 'democrats', 'beiteinu', 'bluewhite', 'reservists'],
+            arab: ['jointlist', 'raam']
+        };
+        const blocSeats = ids => ids.reduce((a, id) => a + (partyById[id] ? partyById[id].seats : 0), 0);
+
         function electionKey5() {
-            const s = POLL.seats, sum = ids => ids.reduce((a, id) => a + (s[id] || 0), 0);
-            const nb = sum(['likud', 'shas', 'utj', 'rzp', 'otzma', 'amcha']);
-            const op = sum(['yashar', 'together', 'democrats', 'beiteinu', 'bluewhite', 'reservists']);
-            const ar = sum(['jointlist', 'raam']);
-            const near = parties.filter(p => p.threshold).length;
+            const nb = blocSeats(BLOC_IDS.netanyahu), op = blocSeats(BLOC_IDS.opposition), ar = blocSeats(BLOC_IDS.arab);
             const enEnd = nb >= 61 ? " That is a majority on paper, but it only holds if every partner stays in."
                 : op >= 61 ? " That is a majority on paper, but only if those parties agree to sit together."
                 : " No camp reaches 61 without crossing someone's red line.";
@@ -1684,8 +1962,8 @@
                 : op >= 61 ? ' זה רוב על הנייר, אבל רק אם המפלגות האלה יסכימו לשבת יחד.'
                 : ' אף מחנה לא מגיע ל-61 בלי לחצות קו אדום של מישהו.';
             return {
-                en: `Start with the builder, then read the four issues and compare the parties. In the average of polls, Netanyahu's bloc has about ${nb} seats, the opposition parties about ${op} and the two Arab lists about ${ar}.` + (near === 1 ? ' One more list is polling close to the threshold.' : near ? ` ${({2: 'Two', 3: 'Three'})[near] || near} more lists are polling close to the threshold.` : '') + enEnd,
-                he: `התחילו בבונה הקואליציה, ואז קראו את ארבעת הנושאים והשוו בין המפלגות. בממוצע הסקרים לגוש נתניהו יש כ-${nb} מנדטים, למפלגות האופוזיציה כ-${op} ולשתי הרשימות הערביות כ-${ar}.` + (near === 1 ? ' עוד רשימה אחת נמצאת סביב אחוז החסימה.' : near ? ` עוד ${({2: 'שתי', 3: 'שלוש'})[near] || near} רשימות נמצאות סביב אחוז החסימה.` : '') + heEnd
+                en: `In the count so far (${countShort('en')}), Netanyahu's bloc has ${nb} seats, the opposition parties ${op} and the two Arab lists ${ar}.` + enEnd + ' The coalition talks at the top of the page follow what happens next.',
+                he: `לפי הספירה עד כה (${countShort('he')}), לגוש נתניהו יש ${nb} מנדטים, למפלגות האופוזיציה ${op} ולשתי הרשימות הערביות ${ar}.` + heEnd + ' המגעים הקואליציוניים בראש העמוד עוקבים אחרי מה שקורה עכשיו.'
             };
         }
 
@@ -1717,12 +1995,15 @@
             const he = lang === 'he';
             const el = document.getElementById('threshold-panel');
             if (!el) return;
-            const items = parties.filter(p => p.threshold).map(p => {
+            const near = nearLine();
+            el.classList.toggle('hidden', near.length === 0);
+            if (!near.length) { passedThreshold.clear(); el.innerHTML = ''; return; }
+            const items = near.map(p => {
                 const on = passedThreshold.has(p.id);
                 return `<div class="rounded-xl p-4 border-2 ${on ? 'border-amber-400 bg-amber-500/10' : 'border-dashed border-slate-600 bg-slate-900/60'} flex flex-col gap-2">
                     <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full shrink-0" style="background:${p.color}"></span><span class="font-semibold text-ink">${t(p.name)}</span></div>
                     <div class="text-sm text-slate-400">${t(p.leader)}</div>
-                    <div class="text-sm text-slate-300 flex-1">${t(pollNote(p))}</div>
+                    <div class="text-sm text-slate-300 flex-1">${t(thresholdNote(p))}</div>
                     <button type="button" onclick="toggleThreshold('${p.id}')" aria-pressed="${on}" class="mt-1 self-start inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold transition ${on ? 'bg-amber-400 text-slate-950 hover:bg-amber-300' : 'bg-slate-800 text-slate-200 border border-slate-600 hover:border-amber-400'}">
                         <i class="fa-solid ${on ? 'fa-check' : 'fa-plus'}"></i>${on ? (he ? 'נכנסה לכנסת (4 מנדטים)' : 'Got in (4 seats)') : (he ? 'נניח שהיא עוברת' : 'What if it gets in?')}
                     </button>
@@ -1730,18 +2011,18 @@
             }).join('');
             const n = passedThreshold.size;
             const note = n === 0
-                ? (he ? 'כרגע הן לא נכללות. לחצו על אחת כדי לראות מה קורה אם היא עוברת: היא מקבלת 4 מנדטים, והם נלקחים באופן יחסי מכל השאר.'
-                      : "They aren't counted right now. Click one to see what happens if it gets in: it takes 4 seats, and those come proportionally out of everyone else.")
+                ? (he ? 'הספירה עוד לא הסתיימה. לחצו כדי לראות מה קורה אם רשימה עוברת בסוף: היא מקבלת 4 מנדטים, והם נלקחים באופן יחסי מכל השאר.'
+                      : "The count isn't finished. Click to see what happens if a list gets in at the end: it takes 4 seats, and those come proportionally out of everyone else.")
                 : (he ? `${n === 1 ? 'רשימה אחת נכנסה' : `${n} רשימות נכנסו`}, ולכן שאר המפלגות חולקות ${120 - 4 * n} מושבים במקום 120. שימו לב איך זה משנה את הגושים.`
                       : `${n === 1 ? 'One list is' : `${n} lists are`} in, so the other parties now share ${120 - 4 * n} seats instead of 120. Watch how that changes the blocs.`);
             el.innerHTML = `
-                <div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-scale-unbalanced text-amber-300"></i><span class="font-semibold text-ink">${he ? 'על סף אחוז החסימה' : 'On the threshold'}</span></div>
+                <div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-scale-unbalanced text-amber-300"></i><span class="font-semibold text-ink">${he ? 'קרוב לאחוז החסימה' : 'Close to the threshold'}</span></div>
                 <p class="text-base text-slate-300 mb-3">${note}</p>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">${items}</div>`;
         }
 
         // Part 1 seat bar
-        // Overview shows a made-up example; Election 2026 shows the real polling average
+        // Overview shows a made-up example; Election 2026 shows the real count
         const exampleParties = ['#3b82f6', '#14b8a6', '#f59e0b', '#ec4899', '#a78bfa', '#94a3b8', '#84cc16', '#dc2626', '#a16207'].map((color, i) => ({
             seats: [30, 24, 14, 12, 10, 9, 8, 7, 6][i], color, ink: '#0f172a',
             name: { en: `Party ${'ABCDEFGHI'[i]}`, he: `מפלגה ${'אבגדהוזחט'[i]}׳` }
@@ -1750,7 +2031,7 @@
             const example = currentAppMode !== 'election';
             document.getElementById('seat-bar-caption').textContent = example
                 ? (lang === 'he' ? 'דוגמה: איך 120 המושבים יכולים להתחלק בין מפלגות' : 'Example: how 120 seats might split between parties')
-                : (lang === 'he' ? `ממוצע הסקרים, ${pollDate('he')} (מנדטים מתוך 120)` : `Average of polls, ${pollDate('en')} (seats out of 120)`);
+                : (lang === 'he' ? `הספירה עד כה, ${countShort('he')} (מנדטים מתוך 120)` : `The count so far, ${countShort('en')} (seats out of 120)`);
             const sorted = example ? exampleParties : parties.filter(p => !p.threshold).sort((a, b) => b.seats - a.seats);
             document.getElementById('israel-seat-bar').innerHTML = sorted.map(p =>
                 `<div class="h-full flex items-center justify-center text-xs font-bold" style="width:${(p.seats / 120) * 100}%;background:${p.color};color:${p.ink}" title="${plabel(p)}: ${p.seats}">${p.seats}</div>`
@@ -1760,16 +2041,209 @@
             ).join('');
         }
 
-        // Stance table (election mode)
+        // Where parties stand (Election 2026 area)
         function renderStanceTable() {
+            const he = lang === 'he';
+            const tag = p => p.withdrew ? (he ? 'פרשה מהמרוץ' : 'Withdrew')
+                : p.threshold ? (COUNT_FINAL ? (he ? 'לא עברה את אחוז החסימה' : "Didn't pass the threshold") : (he ? 'מתחת לאחוז החסימה עד כה' : 'Below the threshold so far'))
+                : '';
             document.getElementById('stance-table').innerHTML = parties.map(p => `
                 <tr class="border-b border-slate-800">
-                    <td class="py-3 pe-3"><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm shrink-0" style="background:${p.color}"></span><span class="font-semibold text-ink">${t(p.name)}</span></div><div class="text-sm text-slate-400 ms-5">${t(p.leader)}</div>${p.threshold ? `<div class="ms-5 mt-1 inline-block text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-200">${lang === 'he' ? 'סביב אחוז החסימה' : 'Near the threshold'}</div>` : ''}</td>
+                    <td class="py-3 pe-3"><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm shrink-0" style="background:${p.color}"></span><span class="font-semibold text-ink">${t(p.name)}</span></div><div class="text-sm text-slate-400 ms-5">${t(p.leader)}</div>${tag(p) ? `<div class="ms-5 mt-1 inline-block text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-200">${tag(p)}</div>` : ''}</td>
                     <td class="py-3 pe-3">${t(p.stance.sec)}</td>
                     <td class="py-3 pe-3">${t(p.stance.draft)}</td>
                     <td class="py-3 pe-3">${t(p.stance.court)}</td>
                     <td class="py-3">${t(p.stance.inquiry)}</td>
                 </tr>`).join('');
+        }
+
+        // =====================================================================
+        // 2b. ELECTION 2026: STATUS, RESULTS AND COALITION TALKS
+        // =====================================================================
+        const STAGES = [
+            { keys: ['counting'], en: 'Votes counted', he: 'ספירת הקולות', sub: { en: 'Unofficial until published', he: 'לא רשמי עד הפרסום' } },
+            { keys: ['results'], en: 'Official results', he: 'התוצאות הרשמיות', sub: { en: 'By 4 November', he: 'עד 4 בנובמבר' } },
+            { keys: ['consultations'], en: 'President consults', he: 'התייעצויות אצל הנשיא', sub: { en: 'Each party recommends a PM', he: 'כל מפלגה ממליצה על מועמד' } },
+            { keys: ['mandate', 'extension', 'second-mandate', 'knesset-21-days'], en: 'Mandate to form a government', he: 'המנדט להרכבת הממשלה', sub: { en: '28 days, plus up to 14', he: '28 ימים, ועוד עד 14' } },
+            { keys: ['government-sworn-in', 'new-election'], en: 'Knesset vote', he: 'הצבעה בכנסת', sub: { en: 'Or, if nobody succeeds, a new election', he: 'או, אם אף אחד לא מצליח, בחירות חדשות' } }
+        ];
+        const STAGE_NOTE = {
+            extension: { en: 'Extension granted', he: 'ניתנה הארכה' },
+            'second-mandate': { en: 'Second try, by another member', he: 'ניסיון שני, בידי חבר כנסת אחר' },
+            'knesset-21-days': { en: '21 days for the Knesset to agree on a name', he: '21 ימים לכנסת להסכים על שם' },
+            'government-sworn-in': { en: 'The new government is sworn in', he: 'הממשלה החדשה הושבעה' },
+            'new-election': { en: 'Nobody succeeded: a new election is called', he: 'אף אחד לא הצליח: הוכרזו בחירות חדשות' }
+        };
+        const CANDIDATE = {
+            netanyahu: { en: 'Netanyahu', he: 'נתניהו', party: 'likud' },
+            eisenkot: { en: 'Eisenkot', he: 'איזנקוט', party: 'yashar' },
+            bennett: { en: 'Bennett', he: 'בנט', party: 'together' },
+            lapid: { en: 'Lapid', he: 'לפיד', party: 'together' },
+            golan: { en: 'Golan', he: 'גולן', party: 'democrats' },
+            lieberman: { en: 'Lieberman', he: 'ליברמן', party: 'beiteinu' },
+            other: { en: 'Someone else', he: 'מישהו אחר' },
+            none: { en: 'No one', he: 'אף אחד' }
+        };
+        const stageKey = () => STAGES.some(s => s.keys.includes(COALITION.stage)) ? COALITION.stage : (COUNT_FINAL ? 'results' : 'counting');
+        const stageIdx = () => STAGES.findIndex(s => s.keys.includes(stageKey()));
+
+        function renderStatusChip() {
+            const he = lang === 'he', k = stageKey(), m = COALITION.mandate || {};
+            let txt;
+            if (k === 'counting') txt = he ? `ספירת הקולות: ${countShort('he')}` : `Votes being counted: ${countShort('en')}`;
+            else if (k === 'results') txt = he ? 'התוצאות הרשמיות פורסמו' : 'Official results are in';
+            else if (k === 'consultations') txt = he ? 'הנשיא מתייעץ עם המפלגות' : 'The President is consulting the parties';
+            else if (m.holder && m.deadline && ['mandate', 'extension', 'second-mandate'].includes(k)) {
+                const d = daysUntil(m.deadline), c = CANDIDATE[m.holder] || CANDIDATE.other;
+                txt = he ? `ל${c.he} יש את המנדט: ${d > 0 ? `נותרו ${d} ימים` : 'הזמן נגמר'}` : `${c.en} has the mandate: ${d > 0 ? `${d} days left` : 'time is up'}`;
+            } else txt = t(STAGE_NOTE[k] || STAGES[stageIdx()]);
+            document.getElementById('election-status-chip').textContent = txt;
+        }
+
+        function renderStageTracker() {
+            const he = lang === 'he', now = stageIdx(), k = stageKey();
+            document.getElementById('stage-tracker').innerHTML = STAGES.map((s, i) => {
+                const cls = i < now || (i === now && k === 'government-sworn-in') ? 'done' : i === now ? 'now' : '';
+                const sub = i === now && STAGE_NOTE[k] ? STAGE_NOTE[k] : s.sub;
+                return `<li class="stage ${cls}"${i === now ? ' aria-current="step"' : ''}>
+                    <div class="flex items-center gap-2 mb-1"><span class="stage-num">${cls === 'done' ? '<i class="fa-solid fa-check text-xs"></i>' : i + 1}</span>${i === now && cls === 'now' ? `<span class="text-xs font-bold uppercase tracking-wide" style="color:var(--accent)">${he ? 'עכשיו' : 'Now'}</span>` : ''}</div>
+                    <div class="font-semibold text-ink leading-snug">${t(s)}</div>
+                    <div class="text-sm text-slate-400 leading-snug mt-0.5">${t(sub)}</div>
+                </li>`;
+            }).join('');
+            const dates = (COALITION.keyDates || []).filter(d => daysUntil(d.date) >= -3);
+            document.getElementById('key-dates').innerHTML = dates.map(d => {
+                const n = daysUntil(d.date);
+                const when = n === 0 ? (he ? 'היום' : 'today') : n === 1 ? (he ? 'מחר' : 'tomorrow') : n > 1 ? (he ? `בעוד ${n} ימים` : `in ${n} days`) : '';
+                return `<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full panel text-sm"><i class="fa-regular fa-calendar text-slate-400"></i><strong class="text-ink">${esc(fmtDate(d.date, lang))}</strong> ${esc(t(d.label))}${when ? ` <span class="text-slate-400">(${when})</span>` : ''}</span>`;
+            }).join('');
+            document.getElementById('status-lead').textContent = t(COALITION.headline) || '';
+        }
+
+        function renderResults() {
+            const he = lang === 'he';
+            const badge = document.getElementById('count-badge');
+            if (!HAS_RESULTS) {
+                document.getElementById('count-title').textContent = he ? 'הספירה עוד לא זמינה' : 'The count is not available yet';
+                document.getElementById('count-sub').textContent = he ? 'התוצאות יופיעו כאן ברגע שיתפרסמו.' : 'Results will appear here as soon as they are published.';
+                badge.className = 'hidden';
+                ['results-rows', 'results-out', 'bloc-bars', 'results-hemicycle', 'count-source'].forEach(id => document.getElementById(id).innerHTML = '');
+                return;
+            }
+            document.getElementById('count-title').textContent = COUNT_FINAL ? (he ? 'התוצאות הרשמיות' : 'Official results')
+                : RESULTS.reporting != null ? (he ? `${RESULTS.reporting}% מהקולות נספרו` : `${RESULTS.reporting}% of ballots counted`)
+                : (he ? 'הספירה הסתיימה' : 'The count is finished');
+            document.getElementById('count-sub').textContent = COUNT_FINAL
+                ? (he ? 'ועדת הבחירות המרכזית פרסמה את התוצאות הסופיות.' : 'The Central Elections Committee has published the final results.')
+                : (he ? `${num(RESULTS.validVotes)} קולות כשרים נספרו עד כה. התוצאות לא רשמיות עד שוועדת הבחירות המרכזית תפרסם אותן, לא יאוחר מ-4 בנובמבר.`
+                      : `${num(RESULTS.validVotes)} valid votes counted so far. The results are unofficial until the Central Elections Committee publishes them, no later than 4 November.`);
+            badge.className = 'self-start lg:self-auto px-3 py-1.5 rounded-full text-sm font-semibold panel-deep text-slate-300';
+            badge.innerHTML = `<i class="fa-regular fa-clock me-1"></i>${he ? 'עודכן' : 'Updated'} ${esc(updateDate(lang))}`;
+
+            // Hemicycle, parties arranged left to right
+            const seatParty = [];
+            parties.filter(p => p.seats > 0).forEach(p => { for (let i = 0; i < p.seats; i++) seatParty.push(p); });
+            document.getElementById('results-hemicycle').innerHTML = seatCoords.map((pt, i) => {
+                const p = seatParty[i];
+                return p ? `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="5.2" fill="${p.color}"><title>${esc(plabel(p))}: ${p.seats}</title></circle>` : '';
+            }).join('');
+
+            // Blocs against 61
+            const blocs = [
+                { ids: BLOC_IDS.netanyahu, color: '#3b82f6', ink: '#fff', en: "Netanyahu's bloc", he: 'גוש נתניהו' },
+                { ids: BLOC_IDS.opposition, color: '#0f8a7e', ink: '#fff', en: 'Opposition parties', he: 'מפלגות האופוזיציה' },
+                { ids: BLOC_IDS.arab, color: '#a16207', ink: '#fff', en: 'Arab parties', he: 'המפלגות הערביות', noGap: true }
+            ];
+            document.getElementById('bloc-bars').innerHTML = blocs.map(b => {
+                const s = blocSeats(b.ids);
+                return `<div><div class="flex justify-between text-sm mb-1"><span class="font-semibold text-ink">${t(b)}</span><span class="text-slate-400">${b.noGap ? '' : s >= 61 ? (he ? 'רוב' : 'majority') : (he ? `חסרים ${61 - s}` : `${61 - s} short`)}</span></div>
+                    <div class="bloc-track"><div class="bloc-fill" style="width:${Math.max(s / 120 * 100, 6)}%;background:${b.color};color:${b.ink}">${s}</div><div class="bloc-61" title="61"></div></div></div>`;
+            }).join('') + `<div class="relative h-4 text-xs font-semibold text-slate-400"><span class="absolute start-[50.83%] mark-center">61</span></div>`;
+
+            // Table
+            const rows = Object.keys(RESULTS.parties).map(id => partyById[id]).filter(Boolean);
+            const diff = p => {
+                if (!p.pollSeats && !p.seats) return '<span class="text-slate-500">·</span>';
+                const d = p.seats - p.pollSeats;
+                return `<span class="${d === 0 ? 'text-slate-500' : 'text-slate-200 font-semibold'}" dir="ltr">${d > 0 ? '+' : d < 0 ? '−' : '±'}${Math.abs(d)}</span>`;
+            };
+            document.getElementById('results-rows').innerHTML = rows.map(p => `
+                <tr class="${p.seats ? '' : 'opacity-60'}">
+                    <td><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm shrink-0" style="background:${p.color}"></span><span class="font-semibold text-ink">${t(p.name)}</span></div><div class="text-sm text-slate-400 ms-5">${t(p.leader)}</div></td>
+                    <td class="text-end tabular-nums">${fmtPct(p.result.pct)}%</td>
+                    <td class="text-end"><span class="inline-block min-w-[2.25rem] text-center px-2 py-0.5 rounded-full text-sm font-bold" style="${p.seats ? `background:${p.color};color:${p.ink}` : ''}">${p.seats || '0'}</span></td>
+                    <td class="text-end">${diff(p)}</td>
+                </tr>`).join('') + `
+                <tr class="text-slate-400"><td>${he ? 'כל שאר הרשימות' : 'All other lists'}</td><td class="text-end tabular-nums">${fmtPct(RESULTS.otherPct)}%</td><td class="text-end">0</td><td></td></tr>`;
+
+            const below = rows.filter(p => !p.seats).map(p => `<strong class="text-ink">${t(p.name)}</strong> ${fmtPct(p.result.pct)}%`);
+            const withdrew = parties.filter(p => p.withdrew).map(p => t(p.name));
+            document.getElementById('results-out').innerHTML = [
+                below.length ? (he ? `<p><i class="fa-solid fa-arrow-down me-1.5 text-slate-400"></i>מתחת לאחוז החסימה (3.25%)${COUNT_FINAL ? '' : ' עד כה'}: ${below.join(', ')}. ${COUNT_FINAL ? 'הקולות שלהן לא מתורגמים למנדטים.' : `בשלב הזה של הספירה צריך כ-${num(RESULTS.thresholdVotes)} קולות כדי לעבור.`}</p>`
+                                   : `<p><i class="fa-solid fa-arrow-down me-1.5 text-slate-400"></i>Below the 3.25% threshold${COUNT_FINAL ? '' : ' so far'}: ${below.join(', ')}. ${COUNT_FINAL ? 'Their votes win no seats.' : `At this point in the count a list needs about ${num(RESULTS.thresholdVotes)} votes to get in.`}</p>`) : '',
+                withdrew.length ? `<p class="mt-1 text-sm text-slate-400">${he ? `${withdrew.join(', ')} פרשה מהמרוץ לפני יום הבחירות.` : `${withdrew.join(', ')} withdrew before election day.`}</p>` : '',
+                `<p class="mt-1 text-sm text-slate-400">${he ? `"מול הסקרים" משווה לממוצע הסקרים האחרון לפני הבחירות (${pollDate('he')}).` : `"vs. polls" compares with the last poll average before the vote (${pollDate('en')}).`}</p>`
+            ].join('');
+
+            document.getElementById('count-source').innerHTML = he
+                ? `הספירה מגיעה מ-<a class="underline" href="${safeUrl(RESULTS.source)}" target="_blank" rel="noopener noreferrer">The Petek</a>, שמפרסם מחדש את נתוני ועדת הבחירות המרכזית ומחשב את המנדטים בשיטת באדר-עופר, כולל הסכמי העודפים. האתר שלנו בודק את החישוב בעצמו. הספירה נבדקת כל 3 שעות. <a class="underline" href="${safeUrl(RESULTS.official)}" target="_blank" rel="noopener noreferrer">לאתר התוצאות הרשמי</a> (נגיש רק מישראל).`
+                : `Count from <a class="underline" href="${safeUrl(RESULTS.source)}" target="_blank" rel="noopener noreferrer">The Petek</a>, which republishes the Central Elections Committee's numbers and works out the seats with the Bader-Ofer method, including the surplus-vote agreements. This site checks that calculation itself. The count is checked every 3 hours. <a class="underline" href="${safeUrl(RESULTS.official)}" target="_blank" rel="noopener noreferrer">Official results site</a> (works from Israel only).`;
+        }
+
+        function renderTalks() {
+            const he = lang === 'he';
+            document.getElementById('talks-headline').textContent = t(COALITION.headline) || '';
+            document.getElementById('talks-updated').textContent = COALITION.updated ? (he ? `עודכן ב-${fmtDate(COALITION.updated, 'he')}` : `Updated ${fmtDate(COALITION.updated, 'en')}`) : '';
+
+            // Who holds the mandate
+            const m = COALITION.mandate || {};
+            const box = document.getElementById('mandate-box');
+            if (m.holder) {
+                const c = CANDIDATE[m.holder] || CANDIDATE.other, d = m.deadline ? daysUntil(m.deadline) : null;
+                box.innerHTML = `<div class="text-sm font-semibold text-slate-400 mb-1">${he ? 'המנדט להרכבת הממשלה' : 'The mandate to form a government'}</div>
+                    <div class="font-display text-2xl font-bold text-ink">${esc(t(c))}</div>
+                    <p class="text-base text-slate-300 mt-1">${he ? `קיבל את המנדט ב-${esc(fmtDate(m.given, 'he'))}.` : `Got the mandate on ${esc(fmtDate(m.given, 'en'))}.`} ${m.deadline ? (he ? `הזמן נגמר ב-${esc(fmtDate(m.deadline, 'he'))}` : `Time runs out on ${esc(fmtDate(m.deadline, 'en'))}`) + (d > 0 ? (he ? ` (בעוד ${d} ימים).` : ` (${d} days left).`) : '.') : ''}</p>`;
+            } else {
+                box.innerHTML = `<div class="text-sm font-semibold text-slate-400 mb-1">${he ? 'המנדט להרכבת הממשלה' : 'The mandate to form a government'}</div>
+                    <div class="font-display text-xl font-bold text-ink">${he ? 'עדיין לא ניתן' : 'Not given yet'}</div>
+                    <p class="text-base text-slate-300 mt-1">${he ? 'אחרי פרסום התוצאות הרשמיות, הנשיא הרצוג מתייעץ תוך 7 ימים עם כל המפלגות ובוחר את חבר הכנסת שיש לו הסיכוי הטוב ביותר להרכיב ממשלה.' : 'Within 7 days of the official results, President Herzog consults every party, then picks the Knesset member with the best chance of forming a government.'}</p>`;
+            }
+
+            // Recommendations to the President
+            const recs = COALITION.recommendations || {};
+            const recBox = document.getElementById('recs-box');
+            const heard = Object.keys(recs).filter(id => partyById[id]);
+            if (!heard.length) {
+                recBox.innerHTML = `<div class="text-sm font-semibold text-slate-400 mb-1">${he ? 'ההמלצות לנשיא' : 'Recommendations to the President'}</div>
+                    <p class="text-base text-slate-300">${he ? 'בהתייעצויות כל מפלגה אומרת לנשיא על מי היא ממליצה לראשות הממשלה. ההמלצות יופיעו כאן, עם מספר המנדטים שמאחורי כל מועמד.' : 'At the consultations each party tells the President whom it recommends for Prime Minister. They will appear here, with the number of seats behind each candidate.'}</p>`;
+            } else {
+                const tally = {};
+                heard.forEach(id => { (tally[recs[id]] = tally[recs[id]] || []).push(partyById[id]); });
+                const order = Object.keys(tally).sort((a, b) => (a === 'none') - (b === 'none') || blocSeats(tally[b].map(p => p.id)) - blocSeats(tally[a].map(p => p.id)));
+                const waiting = parties.filter(p => p.seats > 0 && !recs[p.id]);
+                recBox.innerHTML = `<div class="text-sm font-semibold text-slate-400 mb-3">${he ? 'ההמלצות לנשיא' : 'Recommendations to the President'}</div>` + order.map(c => {
+                    const ps = tally[c], s = blocSeats(ps.map(p => p.id)), cand = CANDIDATE[c] || CANDIDATE.other;
+                    return `<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span class="font-semibold text-ink">${esc(t(cand))}</span><span class="text-slate-400">${s} ${he ? 'מנדטים' : 'seats'}</span></div>
+                        ${c !== 'none' ? `<div class="bloc-track"><div class="bloc-fill" style="width:${Math.max(s / 120 * 100, 6)}%;background:${partyById[cand.party] ? partyById[cand.party].color : '#647089'};color:#fff">${s}</div><div class="bloc-61"></div></div>` : ''}
+                        <div class="text-sm text-slate-400 mt-1">${ps.map(p => t(p.name)).join(', ')}</div></div>`;
+                }).join('') + (waiting.length ? `<p class="text-sm text-slate-400">${he ? 'עדיין לא המליצו' : 'Not yet heard'}: ${waiting.map(p => t(p.name)).join(', ')}</p>` : '');
+            }
+
+            // Day by day
+            const ups = COALITION.updates || [];
+            const item = u => `<article class="update-item">
+                <div class="text-sm font-semibold text-slate-400">${esc(fmtDate(u.date, lang))}</div>
+                <h4 class="font-semibold text-ink text-lg leading-snug">${esc(t(u.title))}</h4>
+                <p class="text-base text-slate-300 leading-relaxed mt-1">${esc(t(u.text))}</p>
+                <div class="text-sm text-slate-400 mt-1">${he ? 'מקורות' : 'Sources'}: ${(u.sources || []).map(s => `<a class="underline hover:text-ink" href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener noreferrer">${esc(s.name)}</a>`).join(' · ')}</div>
+            </article>`;
+            const first = ups.slice(0, 5), rest = ups.slice(5);
+            document.getElementById('talks-timeline').innerHTML = (first.map(item).join('') || `<p class="text-slate-400">${he ? 'עדיין אין עדכונים.' : 'No updates yet.'}</p>`)
+                + (rest.length ? `<details class="more"><summary class="more-btn"><span class="when-closed">${he ? `עדכונים קודמים (${rest.length})` : `Earlier updates (${rest.length})`}</span><span class="when-open">${he ? 'להסתיר' : 'Show less'}</span><i class="fa-solid fa-chevron-down chev text-xs"></i></summary><div class="space-y-5 mt-5">${rest.map(item).join('')}</div></details>` : '');
+
+            // The US midterms note only matters until 3 November
+            const us = document.getElementById('us-midterms-note');
+            if (us) us.classList.toggle('hidden', daysUntil('2026-11-03') < 0);
         }
 
         // =====================================================================
@@ -2397,7 +2871,7 @@
                     explain: { en: 'It was written to start with the next Knesset, so the government formed after this election will be the first to use it, or to change it.', he: 'הוא נכתב כך שיתחיל עם הכנסת הבאה, ולכן הממשלה שתקום אחרי הבחירות האלה תהיה הראשונה שתשתמש בו, או תשנה אותו.' }
                 },
                 {
-                    q: { en: 'Polls show neither camp at 61. If nobody can form a government, what happens?', he: 'לפי הסקרים לאף מחנה אין 61. אם אף אחד לא מצליח להרכיב ממשלה, מה קורה?' },
+                    q: { en: 'If nobody manages to put 61 seats together, what happens?', he: 'אם אף אחד לא מצליח לחבר 61 מנדטים, מה קורה?' },
                     options: [
                         { en: 'The biggest party governs alone.', he: 'המפלגה הגדולה שולטת לבד.' },
                         { en: 'Another election is called, and the current government stays on as a caretaker until then.', he: 'מוכרזות בחירות נוספות, והממשלה הנוכחית ממשיכה עד אז כממשלת מעבר.' },
@@ -2487,7 +2961,7 @@
                 body: { en: 'Should you vote for the party you like best, or for a bigger party that is more likely to pass the threshold and help your camp reach 61?',
                         he: 'האם להצביע למפלגה שאתם הכי אוהבים, או למפלגה גדולה יותר שיש לה יותר סיכוי לעבור את אחוז החסימה ולעזור למחנה שלכם להגיע ל-61?' },
                 basics: { en: "Is a vote for a party that doesn't get in a wasted vote, or an honest one?", he: 'קול למפלגה שלא עוברת הוא קול שהולך לפח, או קול כנה?' },
-                election: { en: 'Which lists polling near the threshold this year could decide which camp gets closer to 61?', he: 'אילו רשימות שנמצאות סביב אחוז החסימה השנה יכולות להכריע איזה מחנה יתקרב ל-61?' }
+                election: { en: 'Lists that miss the threshold win no seats. Look at the count: did the votes for lists below the line help or hurt their own camp?', he: 'רשימות שלא עוברות את אחוז החסימה לא מקבלות מנדטים. הסתכלו בספירה: האם הקולות לרשימות שמתחת לקו עזרו למחנה שלהן או פגעו בו?' }
             }
         ];
         let currentPromptIdx = 0;
@@ -2514,13 +2988,22 @@
             };
             draw('hero-us', seatCoords.map((_, i) => i < 60 ? '#2F5FD0' : '#D2344B'));
             const il = [];
-            exampleParties.forEach(p => { for (let i = 0; i < p.seats; i++) il.push(p.color); });
+            (HAS_RESULTS ? parties.filter(p => p.seats > 0) : exampleParties).forEach(p => { for (let i = 0; i < p.seats; i++) il.push(p.color); });
             draw('hero-il', il);
+            if (HAS_RESULTS) document.getElementById('hero-il-num').textContent = parties.filter(p => p.seats > 0).length;
         }
 
         function renderAll() {
             document.querySelectorAll('.poll-date-en').forEach(el => el.textContent = pollDate('en'));
             document.querySelectorAll('.poll-date-he').forEach(el => el.textContent = pollDate('he'));
+            document.querySelectorAll('.update-date-en').forEach(el => el.textContent = updateDate('en'));
+            document.querySelectorAll('.update-date-he').forEach(el => el.textContent = updateDate('he'));
+            document.querySelectorAll('.count-short-en').forEach(el => el.textContent = countShort('en'));
+            document.querySelectorAll('.count-short-he').forEach(el => el.textContent = countShort('he'));
+            renderStatusChip();
+            renderStageTracker();
+            renderResults();
+            renderTalks();
             renderMode();
             renderHeroHemicycles();
             renderIsraelSeatBar();

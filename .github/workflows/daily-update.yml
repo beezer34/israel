@@ -1,11 +1,21 @@
-# Runs every morning: updates the poll numbers on the site and opens a "Daily check" issue
-# with what changed plus election headlines. News never changes the site by itself.
-name: Daily poll update
+# After the 27 October 2026 election:
+#  - every 3 hours: refresh the vote count on the site (quiet: no issue unless something breaks in the morning run)
+#  - every morning: refresh the count, have Claude update the coalition talks section, and open a
+#    "Daily check" issue with what changed plus election headlines.
+# The coalition update needs an ANTHROPIC_API_KEY repository secret. Without it, everything else still runs.
+name: Daily results and coalition update
 
 on:
   schedule:
-    - cron: "30 6 * * *"   # 06:30 UTC = 09:30 in Israel, after MEF's morning update
-  workflow_dispatch:        # lets you run it by hand from the Actions tab
+    - cron: "30 5 * * *"     # 05:30 UTC = 07:30 in Israel (winter time): full morning update
+    - cron: "15 */3 * * *"   # every 3 hours: vote count only
+  workflow_dispatch:          # run it by hand from the Actions tab
+    inputs:
+      mode:
+        description: "daily = count + coalition + issue, counts = count only"
+        type: choice
+        options: [daily, counts]
+        default: daily
 
 permissions:
   contents: write
@@ -19,21 +29,36 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update poll numbers and write report
-        id: run
-        run: python3 scripts/update_site.py --index index.html --report "$RUNNER_TEMP/report.md"
+      - name: Pick the mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then mode="${{ inputs.mode }}"
+          elif [ "${{ github.event.schedule }}" = "30 5 * * *" ]; then mode=daily
+          else mode=counts; fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
-      - name: Commit if the numbers changed
+      - name: Install the Claude SDK (morning run only)
+        if: steps.mode.outputs.mode == 'daily'
+        run: python3 -m pip install --quiet anthropic==2.3.0
+
+      - name: Update the site and write the report
+        id: run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/update_site.py --index index.html --mode ${{ steps.mode.outputs.mode }} --report "$RUNNER_TEMP/report.md"
+
+      - name: Commit if anything changed
         if: steps.run.outputs.changed == 'true'
         run: |
-          git config user.name "daily-poll-bot"
+          git config user.name "daily-update-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Daily poll update $(date -u +%F)"
+          git commit -m "${{ steps.mode.outputs.mode == 'daily' && 'Daily results and coalition update' || 'Vote count update' }} $(date -u +'%F %H:%M') UTC"
+          git pull --rebase --quiet
           git push
 
       - name: Rebuild the live site
@@ -43,15 +68,15 @@ jobs:
         run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages rebuild request failed; the next push will rebuild it."
 
       - name: Post the daily check issue
-        if: steps.run.outputs.skip != 'true'
+        if: steps.run.outputs.post_issue == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh label create daily-check --color 0E8A16 --description "Automatic daily poll and news check" --force
+          gh label create daily-check --color 0E8A16 --description "Automatic daily results and coalition check" --force
           for n in $(gh issue list --label daily-check --state open --json number --jq '.[].number'); do
             gh issue close "$n" --comment "Replaced by today's check."
           done
           title="Daily check $(date -u +%F)"
-          if [ "${{ steps.run.outputs.status }}" = "error" ]; then title="$title: poll update FAILED"; fi
+          if [ "${{ steps.run.outputs.status }}" = "error" ]; then title="$title: something FAILED"; fi
           url=$(gh issue create --title "$title" --label daily-check --body-file "$RUNNER_TEMP/report.md")
           gh issue edit "$url" --add-assignee arikellman || echo "Could not assign; watch the repo to get these by email."
