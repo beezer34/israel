@@ -366,6 +366,14 @@ def news(feed_urls, limit=15):
     return out[:limit], errors
 
 
+def missing_claude_settings():
+    """The Claude API sign-in uses workload identity federation (GitHub identity token → Anthropic).
+    Returns the settings that are missing; empty when the coalition update can run."""
+    needed = ["ANTHROPIC_FEDERATION_RULE_ID", "ANTHROPIC_ORGANIZATION_ID", "ANTHROPIC_SERVICE_ACCOUNT_ID",
+              "ANTHROPIC_IDENTITY_TOKEN_FILE"]
+    return [k for k in needed if not os.environ.get(k)]
+
+
 # ---------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser()
@@ -443,9 +451,14 @@ def main():
         report += ["", "## Coalition talks"]
         if args.no_claude:
             report.append("Skipped (--no-claude).")
-        elif not os.environ.get("ANTHROPIC_API_KEY"):
-            report.append("**Not updated: there is no ANTHROPIC_API_KEY secret in the repository.** "
-                          "Add one under Settings → Secrets and variables → Actions.")
+        elif [k for k in missing_claude_settings() if k != "ANTHROPIC_IDENTITY_TOKEN_FILE"]:
+            report.append("**Not updated: the Claude API sign-in isn't set up yet** (missing: "
+                          + ", ".join(k for k in missing_claude_settings() if k != "ANTHROPIC_IDENTITY_TOKEN_FILE")
+                          + "). Add them as repository variables under Settings → Secrets and variables → Actions → Variables.")
+        elif missing_claude_settings():
+            out["status"] = "error"
+            report.append("**Not updated: the run couldn't get an identity token from GitHub** to sign in to the "
+                          "Claude API. Check the 'Get an identity token' step in the run log.")
         else:
             try:
                 from coalition_update import update_coalition  # noqa: PLC0415

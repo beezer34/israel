@@ -6,8 +6,10 @@ dated updates, each with its sources. This file checks every field before anythi
 and only ever rewrites the <script id="coalition-data"> block in index.html. The page escapes
 all of this text before showing it, so nothing Claude writes can change the page's layout or code.
 
-Needs the ANTHROPIC_API_KEY environment variable (a GitHub Actions secret) and the
-`anthropic` package (installed by the workflow).
+Signs in with workload identity federation: the workflow puts a GitHub identity token in a file and
+sets the ANTHROPIC_FEDERATION_RULE_ID / _ORGANIZATION_ID / _SERVICE_ACCOUNT_ID / _WORKSPACE_ID /
+_IDENTITY_TOKEN_FILE environment variables, and anthropic.Anthropic() swaps the token for API access by
+itself. Needs the `anthropic` package (installed by the workflow).
 """
 import datetime as dt
 import json

@@ -2,7 +2,11 @@
 #  - every 3 hours: refresh the vote count on the site (quiet: no issue unless something breaks in the morning run)
 #  - every morning: refresh the count, have Claude update the coalition talks section, and open a
 #    "Daily check" issue with what changed plus election headlines.
-# The coalition update needs an ANTHROPIC_API_KEY repository secret. Without it, everything else still runs.
+# The coalition update signs in to the Claude API with workload identity federation: GitHub gives this
+# run a short-lived identity token, and Anthropic swaps it for API access. No API key is stored anywhere.
+# It needs four repository variables (Settings → Secrets and variables → Actions → Variables):
+#   ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID
+# Without them, everything else still runs and the daily issue says the coalition update was skipped.
 name: Daily results and coalition update
 
 on:
@@ -21,6 +25,7 @@ permissions:
   contents: write
   issues: write
   pages: write
+  id-token: write     # lets the run ask GitHub for an identity token to sign in to the Claude API
 
 concurrency:
   group: daily-update
@@ -45,10 +50,23 @@ jobs:
         if: steps.mode.outputs.mode == 'daily'
         run: python3 -m pip install --quiet anthropic==2.3.0
 
+      - name: Get an identity token for the Claude API (morning run only)
+        if: steps.mode.outputs.mode == 'daily' && vars.ANTHROPIC_FEDERATION_RULE_ID != ''
+        run: |
+          curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+            | python3 -c "import json, sys; print(json.load(sys.stdin)['value'], end='')" > "$RUNNER_TEMP/anthropic-identity.jwt"
+          echo "ANTHROPIC_IDENTITY_TOKEN_FILE=$RUNNER_TEMP/anthropic-identity.jwt" >> "$GITHUB_ENV"
+
       - name: Update the site and write the report
         id: run
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # The Anthropic SDK finds these and does the token exchange itself. Do not also set
+          # ANTHROPIC_API_KEY here: even an empty one takes priority over federation.
+          ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
         run: python3 scripts/update_site.py --index index.html --mode ${{ steps.mode.outputs.mode }} --report "$RUNNER_TEMP/report.md"
 
       - name: Commit if anything changed
