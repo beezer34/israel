@@ -2,9 +2,9 @@
 """Updater for Politics Decoded (index.html) after the 27 October 2026 election.
 
 Two modes:
-  --mode counts   Runs every few hours while votes are counted. Reads the latest count and
+  --mode counts   Runs at 13:00, 18:00 and 23:00 Israel time. Reads the latest count and
                   rewrites ONLY the <script id="results-data"> block.
-  --mode daily    Runs every morning. Does the same, then asks Claude to update the coalition
+  --mode daily    Runs at 08:00 Israel time. Does the same, then asks Claude to update the coalition
                   talks (the <script id="coalition-data"> block, see coalition_update.py), pulls
                   election headlines and writes a report that the workflow posts as a GitHub issue.
 
@@ -47,9 +47,12 @@ SITE_URL = "https://beezer34.github.io/israel/"
 UA = "politics-decoded-family-site/2.0 (+https://beezer34.github.io/israel/)"
 # News sites block unknown bots, so the news fetch identifies as a normal browser.
 NEWS_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+# Headlines for the daily issue: Ynet's Hebrew feeds (main news and news flashes) and the Jerusalem Post.
+# Kan has no public feed, and the Times of Israel feed refuses GitHub's servers; Claude searches both directly.
 NEWS_FEEDS = [
+    "https://www.ynet.co.il/Integration/StoryRss2.xml",
+    "https://www.ynet.co.il/Integration/StoryRss1854.xml",
     "https://www.jpost.com/rss/rssfeedsisraelnews.aspx",
-    "https://www.timesofisrael.com/feed/",
 ]
 
 # The Petek party page slug (/party/<slug>) -> id used on the site
@@ -83,6 +86,15 @@ NEWS_WORDS = [
     "utj", "united torah", "haredi", "liberman", "lieberman", "yisrael beytenu", "yisrael beiteinu",
     "ra'am", "raam", "abbas", "joint list", "hadash", "jabareen", "gantz", "hendel", "reservists",
     "ofer winter", "amcha",
+]
+# Hebrew words take prefixes (ו, ה, ב, ל, ש...), so these are matched anywhere in the headline
+NEWS_WORDS_HE = [
+    "בחירות", "כנסת", "קואליצי", "אחוז החסימה", "ספירת", "הקולות", "קלפי", "מעטפות", "ועדת הבחירות",
+    "הרצוג", "הנשיא", "התייעצויות", "מנדט", "להרכיב", "הרכבת הממשלה", "ממשלת אחדות", "ממשלת מעבר", "גוש",
+    "נתניהו", "איזנקוט", "בנט", "לפיד", "גולן", "ליברמן", "בן גביר", "בן-גביר", "סמוטריץ", "דרעי",
+    "עבאס", 'רע"ם', "רע״ם", "ג'בארין", "ג׳בארין", "טיבי", "הנדל", "וינטר",
+    "ליכוד", "ישר!", "ביחד", "הדמוקרטים", 'ש"ס', "ש״ס", "יהדות התורה", "עוצמה יהודית", "הציונות הדתית",
+    "המשותפת", "ישראל ביתנו", "המילואימניקים", "עמך ישראל",
 ]
 
 
@@ -344,7 +356,7 @@ def compare(old, new):
     return lines, flags, nb
 
 
-def news(feed_urls, limit=15):
+def news(feed_urls, limit=10):
     items, errors = [], []
     for url in feed_urls:
         try:
@@ -356,14 +368,17 @@ def news(feed_urls, limit=15):
             title = (it.findtext("title") or "").strip()
             link = (it.findtext("link") or "").strip()
             low = title.lower()
-            if any(re.search(r"\b" + re.escape(w) + r"\b", low) for w in NEWS_WORDS):
+            if any(w in title for w in NEWS_WORDS_HE) or any(re.search(r"\b" + re.escape(w) + r"\b", low) for w in NEWS_WORDS):
                 items.append((title, link))
-    seen, out = set(), []
+    # Up to `limit` headlines from each outlet, so one busy feed doesn't crowd out the others
+    seen, out, per_host = set(), [], {}
     for t, l in items:
-        if t not in seen:
+        host = l.split("/")[2] if l.count("/") >= 2 else ""
+        if t not in seen and per_host.get(host, 0) < limit:
             seen.add(t)
+            per_host[host] = per_host.get(host, 0) + 1
             out.append((t, l))
-    return out[:limit], errors
+    return out, errors
 
 
 def missing_claude_settings():
@@ -471,7 +486,7 @@ def main():
 
     # ---- 4. Headlines list for a human to skim
     if args.mode == "daily" and not args.no_news:
-        report += ["", "## Election headlines (Jerusalem Post and Times of Israel)"]
+        report += ["", "## Election headlines (Ynet in Hebrew, and the Jerusalem Post)"]
         report += [f"- [{t}]({l})" for t, l in headlines] or ["No matching headlines today."]
         if news_errors:
             report.append(f"(Couldn't read: {'; '.join(news_errors)})")

@@ -1,7 +1,7 @@
 # After the 27 October 2026 election:
-#  - every 3 hours: refresh the vote count on the site (quiet: no issue unless something breaks in the morning run)
-#  - every morning: refresh the count, have Claude update the coalition talks section, and open a
+#  - 08:00 Israel time: refresh the count, have Claude update the coalition talks section, and open a
 #    "Daily check" issue with what changed plus election headlines.
+#  - 13:00, 18:00 and 23:00 Israel time: refresh the vote count only (quiet: no issue)
 # The coalition update signs in to the Claude API with workload identity federation: GitHub gives this
 # run a short-lived identity token, and Anthropic swaps it for API access. No API key is stored anywhere.
 # It needs four repository variables (Settings → Secrets and variables → Actions → Variables):
@@ -11,8 +11,9 @@ name: Daily results and coalition update
 
 on:
   schedule:
-    - cron: "30 5 * * *"     # 05:30 UTC = 07:30 in Israel (winter time): full morning update
-    - cron: "15 */3 * * *"   # every 3 hours: vote count only
+    # Times are UTC. Israel is UTC+2 in winter; from 26 March 2027 (summer time) each run lands an hour later.
+    - cron: "0 6 * * *"          # 08:00 Israel: full morning update
+    - cron: "0 11,16,21 * * *"   # 13:00, 18:00 and 23:00 Israel: vote count only
   workflow_dispatch:          # run it by hand from the Actions tab
     inputs:
       mode:
@@ -42,7 +43,7 @@ jobs:
         id: mode
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then mode="${{ inputs.mode }}"
-          elif [ "${{ github.event.schedule }}" = "30 5 * * *" ]; then mode=daily
+          elif [ "${{ github.event.schedule }}" = "0 6 * * *" ]; then mode=daily
           else mode=counts; fi
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 

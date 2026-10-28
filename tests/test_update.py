@@ -94,7 +94,7 @@ def good_raw():
         "new_updates": [{
             "date": "2026-10-28", "title_en": "Talks begin", "title_he": "המגעים מתחילים",
             "text_en": "Parties started talking — informally.", "text_he": "המפלגות החלו לדבר.",
-            "sources": [{"name": "Times of Israel", "url": "https://www.timesofisrael.com/x/"}],
+            "sources": [{"name": "Ynet", "url": "https://www.ynet.co.il/news/article/abc"}],
         }],
         "editor_notes": "",
     }
@@ -130,6 +130,26 @@ class CoalitionChecks(unittest.TestCase):
         raw["new_updates"][0]["sources"] = []
         with self.assertRaises(cu.Fail):
             cu.clean(raw, TODAY)
+
+    def test_only_listed_outlets_count_as_sources(self):
+        raw = good_raw()
+        raw["new_updates"][0]["sources"] = [
+            {"name": "TRT World", "url": "https://www.trtworld.com/x/"},
+            {"name": "Kan", "url": "https://www.kan.org.il/content/kan-news/politic/123/"},
+            {"name": "Ynet (English)", "url": "https://www.ynetnews.com/article/xyz"},
+            {"name": "Times of Israel", "url": "https://www.timesofisrael.com/liveblog-october-28-2026/"},
+        ]
+        _, updates, notes = cu.clean(raw, TODAY)
+        self.assertEqual([x["name"] for x in updates[0]["sources"]], ["Kan", "Ynet (English)", "Times of Israel"])
+        self.assertEqual(notes, "")
+        raw["new_updates"][0]["sources"] = [{"name": "TRT", "url": "https://www.trtworld.com/a"},
+                                            {"name": "Fake", "url": "https://ynet.co.il.evil.com/a"}]
+        _, updates, notes = cu.clean(raw, TODAY)
+        self.assertEqual(updates, [])                                   # nothing left, so the update is dropped
+        self.assertIn("Talks begin", notes)
+
+    def test_search_is_limited_to_listed_outlets(self):
+        self.assertEqual(sorted(cu.NEWS_DOMAINS), ["jpost.com", "kan.org.il", "timesofisrael.com", "ynet.co.il", "ynetnews.com"])
 
     def test_html_is_stripped(self):
         raw = good_raw()

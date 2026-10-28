@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Politics Decoded: US vs. Israel</title>
-    <!-- RESULTS DATA: the vote count, rewritten automatically every few hours by scripts/update_site.py. -->
+    <!-- RESULTS DATA: the vote count, rewritten automatically four times a day by scripts/update_site.py. -->
     <script id="results-data" type="application/json">
 {
   "asOf": "2026-10-28T10:34:36Z",
@@ -1607,7 +1607,7 @@
                 <summary>
                     <div>
             <h3 class="font-display text-2xl font-bold text-ink"><span class="l-en">Sources and where to check</span><span class="l-he">מקורות ואיפה לבדוק</span></h3>
-            <p class="text-base text-slate-400"><span class="l-en">Facts on this page were checked against these sources in October 2026. The count is refreshed every 3 hours and the coalition talks every morning. Most sources are in English.</span><span class="l-he">העובדות בעמוד נבדקו מול המקורות האלה באוקטובר 2026. הספירה מתעדכנת כל 3 שעות והמגעים הקואליציוניים כל בוקר. רוב המקורות באנגלית.</span></p>
+            <p class="text-base text-slate-400"><span class="l-en">Facts on this page were checked against these sources in October 2026. The count is refreshed four times a day (8:00, 13:00, 18:00 and 23:00) and the coalition talks every morning. Most sources are in English.</span><span class="l-he">העובדות בעמוד נבדקו מול המקורות האלה באוקטובר 2026. הספירה מתעדכנת ארבע פעמים ביום (8:00, 13:00, 18:00 ו-23:00) והמגעים הקואליציוניים כל בוקר. רוב המקורות באנגלית.</span></p>
                     </div>
                     <span class="fold-icon"><i class="fa-solid fa-chevron-down chev"></i></span>
                 </summary>
@@ -1635,7 +1635,7 @@
     <footer class="border-t border-slate-800 bg-slate-950 py-8 mt-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-400">
             <div><span class="l-en"><strong class="text-slate-200">Politics Decoded: US vs. Israel</strong> · A family civics guide</span><span class="l-he"><strong class="text-slate-200">פוליטיקה בפשטות: ארה״ב מול ישראל</strong> · מדריך משפחתי לאזרחות</span></div>
-            <div><span class="l-en">Count as of <span class="update-date-en"></span> · refreshed every 3 hours, coalition talks every morning</span><span class="l-he">הספירה נכונה ל-<span class="update-date-he"></span> · מתעדכנת כל 3 שעות, המגעים הקואליציוניים כל בוקר</span></div>
+            <div><span class="l-en">Count as of <span class="update-date-en"></span> · refreshed at 8:00, 13:00, 18:00 and 23:00, coalition talks every morning</span><span class="l-he">הספירה נכונה ל-<span class="update-date-he"></span> · מתעדכנת ב-8:00, 13:00, 18:00 ו-23:00, המגעים הקואליציוניים כל בוקר</span></div>
         </div>
     </footer>
 
@@ -2245,8 +2245,8 @@
             ].join('');
 
             document.getElementById('count-source').innerHTML = he
-                ? `הספירה מגיעה מ-<a class="underline" href="${safeUrl(RESULTS.source)}" target="_blank" rel="noopener noreferrer">The Petek</a>, שמפרסם מחדש את נתוני ועדת הבחירות המרכזית ומחשב את המנדטים בשיטת באדר-עופר, כולל הסכמי העודפים. האתר שלנו בודק את החישוב בעצמו. הספירה נבדקת כל 3 שעות. <a class="underline" href="${safeUrl(RESULTS.official)}" target="_blank" rel="noopener noreferrer">לאתר התוצאות הרשמי</a> (נגיש רק מישראל).`
-                : `Count from <a class="underline" href="${safeUrl(RESULTS.source)}" target="_blank" rel="noopener noreferrer">The Petek</a>, which republishes the Central Elections Committee's numbers and works out the seats with the Bader-Ofer method, including the surplus-vote agreements. This site checks that calculation itself. The count is checked every 3 hours. <a class="underline" href="${safeUrl(RESULTS.official)}" target="_blank" rel="noopener noreferrer">Official results site</a> (works from Israel only).`;
+                ? `הספירה מגיעה מ-<a class="underline" href="${safeUrl(RESULTS.source)}" target="_blank" rel="noopener noreferrer">The Petek</a>, שמפרסם מחדש את נתוני ועדת הבחירות המרכזית ומחשב את המנדטים בשיטת באדר-עופר, כולל הסכמי העודפים. האתר שלנו בודק את החישוב בעצמו. הספירה נבדקת ארבע פעמים ביום: 8:00, 13:00, 18:00 ו-23:00. <a class="underline" href="${safeUrl(RESULTS.official)}" target="_blank" rel="noopener noreferrer">לאתר התוצאות הרשמי</a> (נגיש רק מישראל).`
+                : `Count from <a class="underline" href="${safeUrl(RESULTS.source)}" target="_blank" rel="noopener noreferrer">The Petek</a>, which republishes the Central Elections Committee's numbers and works out the seats with the Bader-Ofer method, including the surplus-vote agreements. This site checks that calculation itself. The count is checked four times a day: 8:00, 13:00, 18:00 and 23:00. <a class="underline" href="${safeUrl(RESULTS.official)}" target="_blank" rel="noopener noreferrer">Official results site</a> (works from Israel only).`;
         }
 
         function renderTalks() {
