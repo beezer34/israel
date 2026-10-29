@@ -177,8 +177,20 @@ def parse_petek(page):
     if not m:
         raise Fail("Couldn't find the number of valid votes counted on The Petek's page.")
     valid = int(m.group(1).replace(",", ""))
+    # How far the count has got. The Petek's banner changes with each phase of the count:
+    #   polling stations:  "Counting · 76.89% of ballots"
+    #   double envelopes:  "Double envelopes being counted · 152,567 votes so far" plus "≈94.7% COUNTED, EST."
+    # Anything else is "unknown": never assume the count is finished just because the banner changed.
+    phase, reporting, estimate, envelopes = "unknown", None, False, None
     m = re.search(r"Counting\s*·\s*(\d+(?:\.\d+)?)% of ballots", text)
-    reporting = float(m.group(1)) if m else None
+    if m:
+        phase, reporting = "polling-stations", float(m.group(1))
+    m = re.search(r"Double envelopes being counted\s*·\s*([\d,]+) votes so far", text, re.I)
+    if m:
+        phase, envelopes = "double-envelopes", int(m.group(1).replace(",", ""))
+        m = re.search(r"≈\s*(\d+(?:\.\d+)?)%\s*COUNTED", text)
+        if m:
+            reporting, estimate = float(m.group(1)), True
     m = re.search(r'"dateModified":"([0-9T:\-.]+Z)"', page) or re.search(r'<time dateTime="([0-9T:\-.]+Z)"', page)
     if not m:
         raise Fail("Couldn't find when The Petek last updated its results.")
@@ -186,7 +198,8 @@ def parse_petek(page):
     stated = {}
     for num_, bloc in re.findall(r"(\d+)\s+seats for the\s+(coalition|opposition)", text):
         stated[bloc] = int(num_)
-    return {"lists": lists, "validVotes": valid, "reporting": reporting, "asOf": as_of, "statedBlocs": stated}
+    return {"lists": lists, "validVotes": valid, "phase": phase, "reporting": reporting, "reportingEstimate": estimate,
+            "doubleEnvelopeVotes": envelopes, "asOf": as_of, "statedBlocs": stated}
 
 
 # ---------------------------------------------------------------- seat calculation (second check)
@@ -266,12 +279,16 @@ def build_results(parsed, today):
         if key in stated and stated[key] != ours:
             raise Fail(f"The Petek says the {key} bloc has {stated[key]} seats, but its party rows add up to {ours}.")
 
-    reporting = parsed["reporting"]
-    final = today >= FINAL_RESULTS_DUE and reporting is None
+    # Official results are published by 4 November; only after that, and only once The Petek no longer
+    # shows any counting under way, is the count treated as final.
+    final = today >= FINAL_RESULTS_DUE and parsed["phase"] not in ("polling-stations", "double-envelopes")
     return {
         "asOf": parsed["asOf"],
         "status": "final" if final else "counting",
-        "reporting": reporting,
+        "phase": parsed["phase"],
+        "reporting": parsed["reporting"],
+        "reportingEstimate": parsed["reportingEstimate"],
+        "doubleEnvelopeVotes": parsed["doubleEnvelopeVotes"],
         "validVotes": parsed["validVotes"],
         "thresholdVotes": int(THRESHOLD * parsed["validVotes"]) + 1,
         "otherPct": round(max(0.0, 100 - sum(p["pct"] for p in parties.values())), 2),
@@ -283,7 +300,7 @@ def build_results(parsed, today):
 
 def seat_check(parsed):
     """Work the seats out from the vote shares and list any party where The Petek differs by more than 1.
-    Shares are rounded on The Petek's page, so a difference of 1 can be rounding."""
+    Shares are rounded on The Petek's page, so a difference of 1 is normal rounding and not reported."""
     votes = {}
     for slug, l in parsed["lists"].items():
         votes[PETEK_IDS.get(slug) or slug] = l["pct"] / 100 * parsed["validVotes"]
@@ -291,7 +308,7 @@ def seat_check(parsed):
     out = []
     for slug, l in parsed["lists"].items():
         key = PETEK_IDS.get(slug) or slug
-        if abs(ours.get(key, 0) - l["seats"]) >= 1:
+        if abs(ours.get(key, 0) - l["seats"]) > 1:
             out.append((key, l["seats"], ours.get(key, 0)))
     return out
 
@@ -426,7 +443,17 @@ def main():
             index_html = write_block(index_html, "results-data", new)
         results = new
 
-        counted = f"{new['reporting']}% of ballots counted" if new["reporting"] is not None else "count complete"
+        if new["phase"] == "double-envelopes":
+            counted = (f"all polling stations in, double envelopes being counted ({new['doubleEnvelopeVotes']:,} so far"
+                       + (f", about {new['reporting']}% of all votes)" if new["reporting"] else ")"))
+        elif new["reporting"] is not None:
+            counted = f"{new['reporting']}% of ballots counted"
+        elif new["status"] == "final":
+            counted = "count complete"
+        else:
+            counted = "share counted not shown"
+            flags.append("Couldn't read how much of the vote is counted: The Petek's banner has changed. "
+                         "The site says the count is still going on. Ask Claude to look at parse_petek().")
         report.append("## Vote count")
         report.append(f"{'**Final official results.**' if new['status'] == 'final' else 'Still counting'}: {counted}, "
                       f"{new['validVotes']:,} valid votes ([The Petek]({PETEK_URL}), from the "
@@ -439,11 +466,8 @@ def main():
         report.append("")
         report.append("Blocs now: " + " · ".join(f"{b} {s}" for b, s in nb.items()))
         if differ:
-            flags.append("Working the seats out from The Petek's rounded vote shares gives a different answer for: "
-                         + "; ".join(f"{NAMES.get(k, k)} (The Petek {a}, check {b})" for k, a, b in differ)
-                         + ". One seat apart is usually rounding; more is worth a look.")
-            if any(abs(a - b) > 1 for _, a, b in differ):
-                raise Fail("The Petek's seats differ from the check calculation by more than one seat. Not published.")
+            raise Fail("The Petek's seats differ from the check calculation by more than one seat for: "
+                       + "; ".join(f"{NAMES.get(k, k)} (The Petek {a}, check {b})" for k, a, b in differ) + ". Not published.")
         if flags:
             report += ["", "## Worth a look"] + [f"- {f}" for f in flags]
     except Exception as e:  # noqa: BLE001

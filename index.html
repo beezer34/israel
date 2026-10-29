@@ -9,7 +9,10 @@
 {
   "asOf": "2026-10-29T09:17:20Z",
   "status": "counting",
-  "reporting": null,
+  "phase": "double-envelopes",
+  "reporting": 94.7,
+  "reportingEstimate": true,
+  "doubleEnvelopeVotes": 152567,
   "validVotes": 5353215,
   "thresholdVotes": 173980,
   "otherPct": 1.0,
@@ -2179,9 +2182,11 @@
         function countShort(l) {
             if (!HAS_RESULTS) return l === 'he' ? 'עדיין אין ספירה' : 'no count yet';
             if (COUNT_FINAL) return l === 'he' ? 'התוצאות הרשמיות' : 'official results';
-            return RESULTS.reporting != null
-                ? (l === 'he' ? `${RESULTS.reporting}% מהקולות נספרו` : `${RESULTS.reporting}% of ballots counted`)
-                : (l === 'he' ? 'הספירה הסתיימה, עדיין לא רשמי' : 'count finished, not yet official');
+            if (RESULTS.phase === 'double-envelopes') return RESULTS.reporting != null
+                ? (l === 'he' ? `סופרים את המעטפות הכפולות, כ-${RESULTS.reporting}% מהקולות נספרו` : `double envelopes being counted, about ${RESULTS.reporting}% of votes in`)
+                : (l === 'he' ? 'סופרים את המעטפות הכפולות' : 'double envelopes being counted');
+            if (RESULTS.reporting != null) return l === 'he' ? `${RESULTS.reporting}% מהקולות נספרו` : `${RESULTS.reporting}% of ballots counted`;
+            return l === 'he' ? 'הספירה נמשכת, עדיין לא רשמי' : 'still counting, not yet official';
         }
 
         // Parties below the line: what the count says about each one
@@ -2341,7 +2346,8 @@
         function renderStatusChip() {
             const he = lang === 'he', k = stageKey(), m = COALITION.mandate || {};
             let txt;
-            if (k === 'counting') txt = he ? `ספירת הקולות: ${countShort('he')}` : `Votes being counted: ${countShort('en')}`;
+            if (k === 'counting' && RESULTS.phase === 'double-envelopes') { const c = countShort(lang); txt = c.charAt(0).toUpperCase() + c.slice(1); }
+            else if (k === 'counting') txt = he ? `ספירת הקולות: ${countShort('he')}` : `Votes being counted: ${countShort('en')}`;
             else if (k === 'results') txt = he ? 'התוצאות הרשמיות פורסמו' : 'Official results are in';
             else if (k === 'consultations') txt = he ? 'הנשיא מתייעץ עם המפלגות' : 'The President is consulting the parties';
             else if (m.holder && m.deadline && ['mandate', 'extension', 'second-mandate'].includes(k)) {
@@ -2381,13 +2387,19 @@
                 ['results-rows', 'results-out', 'bloc-bars', 'results-hemicycle', 'count-source'].forEach(id => document.getElementById(id).innerHTML = '');
                 return;
             }
+            const envelopes = RESULTS.phase === 'double-envelopes';
             document.getElementById('count-title').textContent = COUNT_FINAL ? (he ? 'התוצאות הרשמיות' : 'Official results')
+                : envelopes ? (he ? 'סופרים את המעטפות הכפולות' : 'Counting the double envelopes')
                 : RESULTS.reporting != null ? (he ? `${RESULTS.reporting}% מהקולות נספרו` : `${RESULTS.reporting}% of ballots counted`)
-                : (he ? 'הספירה הסתיימה' : 'The count is finished');
+                : (he ? 'הספירה נמשכת' : 'Still counting');
+            const unofficial = he ? 'התוצאות לא רשמיות עד שוועדת הבחירות המרכזית תפרסם אותן, לא יאוחר מ-4 בנובמבר.'
+                                  : 'The results are unofficial until the Central Elections Committee publishes them, no later than 4 November.';
             document.getElementById('count-sub').textContent = COUNT_FINAL
                 ? (he ? 'ועדת הבחירות המרכזית פרסמה את התוצאות הסופיות.' : 'The Central Elections Committee has published the final results.')
-                : (he ? `${num(RESULTS.validVotes)} קולות כשרים נספרו עד כה. התוצאות לא רשמיות עד שוועדת הבחירות המרכזית תפרסם אותן, לא יאוחר מ-4 בנובמבר.`
-                      : `${num(RESULTS.validVotes)} valid votes counted so far. The results are unofficial until the Central Elections Committee publishes them, no later than 4 November.`);
+                : envelopes
+                ? (he ? `כל הקלפיות דיווחו. עכשיו סופרים את המעטפות הכפולות: קולות של חיילים, דיפלומטים, מאושפזים ואסירים${RESULTS.doubleEnvelopeVotes ? ` (${num(RESULTS.doubleEnvelopeVotes)} עד כה)` : ''}. הן עוד יכולות להזיז מנדט או שניים. ${unofficial}`
+                      : `Every polling station has reported. Now the double envelopes are being counted: votes from soldiers, diplomats, hospitals and prisons${RESULTS.doubleEnvelopeVotes ? ` (${num(RESULTS.doubleEnvelopeVotes)} so far)` : ''}. They can still shift a seat or two. ${unofficial}`)
+                : (he ? `${num(RESULTS.validVotes)} קולות כשרים נספרו עד כה. ${unofficial}` : `${num(RESULTS.validVotes)} valid votes counted so far. ${unofficial}`);
             badge.className = 'self-start lg:self-auto px-3 py-1.5 rounded-full text-sm font-semibold panel-deep text-slate-300';
             badge.innerHTML = `<i class="fa-regular fa-clock me-1"></i>${he ? 'עודכן' : 'Updated'} ${esc(updateDate(lang))}`;
 

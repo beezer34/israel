@@ -32,6 +32,23 @@ class Count(unittest.TestCase):
         self.assertEqual(res["parties"]["reservists"]["seats"], 0)
         self.assertEqual(us.blocs(res["parties"]), {"Netanyahu bloc": 54, "Opposition": 47, "Arab parties": 19})
 
+    def test_double_envelope_phase(self):
+        with open(os.path.join(HERE, "petek_fixture_envelopes.html"), encoding="utf-8") as f:
+            parsed = us.parse_petek(f.read())
+        self.assertEqual(parsed["phase"], "double-envelopes")
+        self.assertEqual(parsed["doubleEnvelopeVotes"], 152567)
+        self.assertEqual((parsed["reporting"], parsed["reportingEstimate"]), (94.7, True))
+        res = us.build_results(parsed, TODAY)
+        self.assertEqual(res["status"], "counting")
+        self.assertEqual(us.build_results(parsed, dt.date(2026, 11, 5))["status"], "counting")   # still counting
+        self.assertEqual(us.seat_check(parsed), [])
+
+    def test_unrecognised_banner_is_never_final_by_accident(self):
+        page = fixture().replace("Counting · 76.89% of ballots", "Something new")
+        parsed = us.parse_petek(page)
+        self.assertEqual((parsed["phase"], parsed["reporting"]), ("unknown", None))
+        self.assertEqual(us.build_results(parsed, TODAY)["status"], "counting")
+
     def test_own_seat_calculation_agrees(self):
         self.assertEqual(us.seat_check(us.parse_petek(fixture())), [])
 
@@ -50,7 +67,7 @@ class Count(unittest.TestCase):
 
     def test_final_only_after_publication_date(self):
         parsed = us.parse_petek(fixture())
-        parsed["reporting"] = None
+        parsed["phase"], parsed["reporting"] = "unknown", None
         self.assertEqual(us.build_results(parsed, TODAY)["status"], "counting")
         self.assertEqual(us.build_results(parsed, dt.date(2026, 11, 4))["status"], "final")
 
@@ -173,7 +190,7 @@ class CoalitionChecks(unittest.TestCase):
         out, lines = cu.update_coalition(page, None, [], TODAY)
         data = us.read_block(out, "coalition-data")
         self.assertEqual(data["stage"], "consultations")
-        self.assertEqual(data["updates"][0]["title"]["en"], "Talks begin")
+        self.assertIn("Talks begin", [u["title"]["en"] for u in data["updates"]])   # newest-first, so not always on top
         self.assertTrue(any("Claude updated" in l for l in lines))
         # Running again with the same answer adds nothing new
         out2, _ = cu.update_coalition(out, None, [], TODAY)
