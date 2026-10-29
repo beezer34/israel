@@ -9,18 +9,21 @@
 # Without them, everything else still runs and the daily issue says the coalition update was skipped.
 name: Daily results and coalition update
 
+# What each run does is decided by the Israel clock, not by which trigger fired (see "Pick the mode"):
+# the first run after 08:00 Israel time that finds no "Daily check <today>" issue does the full update;
+# every other run only checks the count. GitHub's scheduler often starts runs hours late or skips them,
+# so this keeps the morning update from being lost, and never pays for Claude twice in one day.
 on:
   schedule:
-    # Times are UTC. Israel is UTC+2 in winter; from 26 March 2027 (summer time) each run lands an hour later.
-    - cron: "0 6 * * *"          # 08:00 Israel: full morning update
-    - cron: "0 11,16,21 * * *"   # 13:00, 18:00 and 23:00 Israel: vote count only
-  workflow_dispatch:          # run it by hand from the Actions tab
+    # Times are UTC (Israel is UTC+2 in winter, UTC+3 from 26 March 2027). Off the hour, when GitHub is less busy.
+    - cron: "7 6,11,16,21 * * *"    # aims for 08:07, 13:07, 18:07 and 23:07 Israel time
+  workflow_dispatch:          # run it by hand from the Actions tab, or from an outside scheduler
     inputs:
       mode:
-        description: "daily = count + coalition + issue, counts = count only"
+        description: "auto = full update if today's hasn't run yet, otherwise count only"
         type: choice
-        options: [daily, counts]
-        default: daily
+        options: [auto, daily, counts]
+        default: auto
 
 permissions:
   contents: write
@@ -41,11 +44,22 @@ jobs:
 
       - name: Pick the mode
         id: mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED: ${{ inputs.mode || 'auto' }}
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then mode="${{ inputs.mode }}"
-          elif [ "${{ github.event.schedule }}" = "0 6 * * *" ]; then mode=daily
-          else mode=counts; fi
+          today=$(TZ=Asia/Jerusalem date +%F)
+          hour=$(TZ=Asia/Jerusalem date +%-H)
+          # Has today's full update already been done? (listing, not search, so a brand-new issue counts at once)
+          done_today=$(gh issue list -R "$GITHUB_REPOSITORY" --label daily-check --state all --limit 10             --json title --jq "[.[] | select(.title | startswith(\"Daily check $today\"))] | length")
+          if [ "$REQUESTED" = "auto" ]; then
+            if [ "$hour" -ge 8 ] && [ "$done_today" = "0" ]; then mode=daily; else mode=counts; fi
+          else
+            mode="$REQUESTED"
+          fi
+          echo "Israel time: $today $(TZ=Asia/Jerusalem date +%H:%M). Trigger: ${{ github.event_name }}. Requested: $REQUESTED. Today's full update already done: $done_today. Mode: $mode"
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "today=$today" >> "$GITHUB_OUTPUT"
 
       - name: Install the Claude SDK (morning run only)
         if: steps.mode.outputs.mode == 'daily'
@@ -95,7 +109,7 @@ jobs:
           for n in $(gh issue list --label daily-check --state open --json number --jq '.[].number'); do
             gh issue close "$n" --comment "Replaced by today's check."
           done
-          title="Daily check $(date -u +%F)"
+          title="Daily check ${{ steps.mode.outputs.today }}"
           if [ "${{ steps.run.outputs.status }}" = "error" ]; then title="$title: something FAILED"; fi
           url=$(gh issue create --title "$title" --label daily-check --body-file "$RUNNER_TEMP/report.md")
           gh issue edit "$url" --add-assignee arikellman || echo "Could not assign; watch the repo to get these by email."
